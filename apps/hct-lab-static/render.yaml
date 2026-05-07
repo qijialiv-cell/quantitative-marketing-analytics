@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: hct-digital-marketing-ai-lab
+    runtime: static
+    buildCommand: echo "Static site, no build needed"
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: ALLOWALL
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
