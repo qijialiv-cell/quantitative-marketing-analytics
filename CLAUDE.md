@@ -1,4 +1,4 @@
-# CLAUDE.md — Academic Computational Marketing System
+# CLAUDE.md — Quantitative Marketing & Marketing Analytics System
 ## University of Liverpool | Marketing Department
 
 > **Purpose:** This file is the operating contract between Claude and this repository.

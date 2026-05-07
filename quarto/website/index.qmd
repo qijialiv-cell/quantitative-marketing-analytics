@@ -1,38 +1,75 @@
 ---
-title: "Computational Marketing"
-subtitle: "Research & Teaching | University of Liverpool"
+title: "Qijia Liao"
+subtitle: "PhD in Marketing · University of Liverpool Management School"
 page-layout: full
 ---
 
-## Welcome
+## About
 
-This site documents research and teaching outputs from the Computational Marketing group
-at the University of Liverpool, Marketing Department.
+I am a quantitative marketing scholar employing experimental design, causal inference,
+and machine learning to examine strategic marketing phenomena in digital environments.
+My research integrates marketing strategy, consumer behavior, and artificial intelligence.
 
----
+**PhD Viva Passed — February 2026**
 
-## Teaching
-
-| Module | Term | Materials |
-|---|---|---|
-| Machine Learning for Marketing (MKTS 301) | Spring 2026 | [Slides](#) · [Labs](#) |
-| Data Visualisation for Marketing (MKTS 215) | Spring 2026 | [Slides](#) · [Labs](#) |
-| Introduction to Deep Learning (MKTS 420) | Spring 2026 | [Slides](#) · [Labs](#) |
+[Google Scholar](https://scholar.google.com/citations?user=s2lwLxMAAAAJ) ·
+[GitHub](https://github.com/qijialiv-cell) ·
+[Email](mailto:qijia.liv@gmail.com)
 
 ---
 
 ## Research
 
-Current working papers:
+My research lies at the intersection of marketing strategy and consumer behavior, with a focus
+on digital marketing, brand activism, and artificial intelligence in marketing.
 
-- **Brand Activism and Consumer Response** — NLP analysis of brand social media
-- **Influencer Marketing Effectiveness** — ML-based causal estimation
-- **Causal NLP in Marketing** — Text-as-treatment identification strategies
+### Brand Activism
+
+Investigating brand activism in non-Western institutional contexts and its impact on consumer
+and investor behavior. Introducing the concept of *System-Threat Activism (STA)* and examining
+its effects on consumer responses through identity-threat mechanisms.
+
+### AI, Digital Platforms & Marketing Analytics
+
+Examining artificial intelligence and algorithmic systems in digital marketing environments
+using large-scale data and deep learning. This stream explores influencer marketing effectiveness
+and algorithmic valuation anomalies in digital platforms.
+
+### Selected Publications
+
+- **Liao, Q., Yang, L., & Lim, E. J. (2023).** "A bibliometric and content analysis of
+  marketing-finance interface research from 1986–2021," *Journal of Business & Finance
+  Librarianship*, 28(4), 278–301.
+- **Liao, Q., Byrom, J., Guenther, M., & Song, F.** "When Brand Activism Threatens Consumers'
+  Identity: An Investigation of System-Threat Activism," *AMA Winter Conference 2025*, Phoenix, AZ.
+
+---
+
+## Teaching
+
+| Module | Level | Topics |
+|--------|-------|--------|
+| Marketing & Digital Analytics (MKIB340) | UG & PG | RStudio, Sentiment Analysis, LDA Topic Modeling |
+| Market Research (MKIB256) | UG | Statistics, Experimental Design, SPSS |
+| Fundamentals of Marketing (MKIB153) | UG | Marketing Core Concepts |
+| Digital Marketing, Analytics & AI+ | HCT | ML, Data Viz, Applied AI for Marketing |
+
+300+ hours as Teaching Assistant across undergraduate and postgraduate courses.
 
 ---
 
 ## Interactive Demos
 
+- [ML for Marketing Lab](#) — Interactive HCT learning lab
 - [Churn Prediction Simulator](#) — Streamlit · Render
 - [Embedding Similarity Explorer](#) — Gradio · Hugging Face Spaces
-- [Sentiment Classifier](#) — Gradio · Hugging Face Spaces
+
+---
+
+## Academic Job Market
+
+Available for **Assistant Professor** or **Postdoctoral** positions in Marketing
+(August 2026 or earlier). Please feel free to reach out — I welcome inquiries about
+my research, teaching, and availability.
+
+[Send Email](mailto:qijia.liv@gmail.com)
