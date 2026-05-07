@@ -3,39 +3,30 @@ project:
   output-dir: _site
 
 website:
-  title: "Qijia Liao — Quantitative Marketing & Marketing Analytics"
-  site-url: https://qijialiao.com
-  description: "Academic homepage for Qijia Liao — PhD in Marketing, University of Liverpool. Quantitative marketing, marketing analytics, NLP, causal inference."
+  title: "Qijia Liao"
+  description: "PhD Researcher in Marketing | University of Liverpool"
+  favicon: ""
+
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: teaching.qmd
-        text: Teaching
       - href: research.qmd
         text: Research
-      - href: labs.qmd
-        text: Labs 🔒
-      - href: demos.qmd
-        text: Demos
-      - href: feedback.qmd
-        text: Feedback
+      - href: teaching.qmd
+        text: Teaching
     right:
       - icon: github
         href: https://github.com/qijialiv-cell
-      - icon: mortarboard-fill
+      - icon: google
         href: https://scholar.google.com/citations?user=s2lwLxMAAAAJ
-        text: Google Scholar
+
   page-footer:
-    center: |
-      © 2026 Qijia Liao · University of Liverpool Management School
+    center: "© 2026 Qijia Liao · University of Liverpool Management School"
 
 format:
   html:
     theme: cosmo
     css: styles.css
-    toc: true
-    code-fold: true
-
-execute:
-  freeze: auto
+    toc: false
+    smooth-scroll: true

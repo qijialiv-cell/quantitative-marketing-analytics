@@ -1,75 +1,60 @@
 ---
-title: "Qijia Liao"
-subtitle: "PhD in Marketing · University of Liverpool Management School"
+title: ""
 page-layout: full
 ---
 
+::: {.columns}
+
+::: {.column width="30%"}
+
+![](https://via.placeholder.com/200x200/2c3e50/ffffff?text=QL){.rounded-circle style="border-radius: 50%; width: 180px;"}
+
+### Qijia Liao 廖琦佳
+
+PhD Researcher in Marketing  
+University of Liverpool Management School
+
+---
+
+**Interests**  
+Quantitative Marketing · NLP · Machine Learning · Brand Analytics
+
+---
+
+**Links**  
+[{{< fa brands google-scholar >}} Google Scholar](https://scholar.google.com/citations?user=s2lwLxMAAAAJ)  
+[{{< fa brands github >}} GitHub](https://github.com/qijialiv-cell)
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="65%"}
+
 ## About
 
-I am a quantitative marketing scholar employing experimental design, causal inference,
-and machine learning to examine strategic marketing phenomena in digital environments.
-My research integrates marketing strategy, consumer behavior, and artificial intelligence.
+I am a PhD student in Marketing at the **University of Liverpool Management School**, where I work on quantitative and computational approaches to marketing problems.
 
-**PhD Viva Passed — February 2026**
-
-[Google Scholar](https://scholar.google.com/citations?user=s2lwLxMAAAAJ) ·
-[GitHub](https://github.com/qijialiv-cell) ·
-[Email](mailto:qijia.liv@gmail.com)
+My research sits at the intersection of **machine learning**, **natural language processing**, and **consumer behaviour** — applying modern data science methods to understand how brands, consumers, and markets interact.
 
 ---
 
-## Research
+## Research Interests
 
-My research lies at the intersection of marketing strategy and consumer behavior, with a focus
-on digital marketing, brand activism, and artificial intelligence in marketing.
-
-### Brand Activism
-
-Investigating brand activism in non-Western institutional contexts and its impact on consumer
-and investor behavior. Introducing the concept of *System-Threat Activism (STA)* and examining
-its effects on consumer responses through identity-threat mechanisms.
-
-### AI, Digital Platforms & Marketing Analytics
-
-Examining artificial intelligence and algorithmic systems in digital marketing environments
-using large-scale data and deep learning. This stream explores influencer marketing effectiveness
-and algorithmic valuation anomalies in digital platforms.
-
-### Selected Publications
-
-- **Liao, Q., Yang, L., & Lim, E. J. (2023).** "A bibliometric and content analysis of
-  marketing-finance interface research from 1986–2021," *Journal of Business & Finance
-  Librarianship*, 28(4), 278–301.
-- **Liao, Q., Byrom, J., Guenther, M., & Song, F.** "When Brand Activism Threatens Consumers'
-  Identity: An Investigation of System-Threat Activism," *AMA Winter Conference 2025*, Phoenix, AZ.
+- **Computational Marketing** — text-as-data approaches to brand and consumer research  
+- **Machine Learning for Marketing** — predictive models, customer analytics, churn prediction  
+- **Causal Inference** — identifying marketing effects beyond correlation  
+- **NLP** — sentiment analysis, topic modelling, embedding-based representations
 
 ---
 
-## Teaching
+## News
 
-| Module | Level | Topics |
-|--------|-------|--------|
-| Marketing & Digital Analytics (MKIB340) | UG & PG | RStudio, Sentiment Analysis, LDA Topic Modeling |
-| Market Research (MKIB256) | UG | Statistics, Experimental Design, SPSS |
-| Fundamentals of Marketing (MKIB153) | UG | Marketing Core Concepts |
-| Digital Marketing, Analytics & AI+ | HCT | ML, Data Viz, Applied AI for Marketing |
+- **May 2026** — Teaching Analytics system deployed for student feedback collection
+- **2026 Spring** — Teaching *Quantitative Marketing Analytics* at UoL Management School
+- **Ongoing** — Working on brand activism and influencer ML research projects
 
-300+ hours as Teaching Assistant across undergraduate and postgraduate courses.
+:::
 
----
-
-## Interactive Demos
-
-- [ML for Marketing Lab](#) — Interactive HCT learning lab
-- [Churn Prediction Simulator](#) — Streamlit · Render
-- [Embedding Similarity Explorer](#) — Gradio · Hugging Face Spaces
-
----
-
-## Academic Job Market
-
-Available for **Assistant Professor** or **Postdoctoral** positions in Marketing
-(August 2026 or earlier). Please feel free to reach out — I welcome inquiries about
-my research, teaching, and availability.
-
-[Send Email](mailto:qijia.liv@gmail.com)
+:::

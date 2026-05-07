@@ -1,0 +1,34 @@
+---
+title: "Research"
+---
+
+## Working Papers
+
+**Brand Activism and Consumer Response**  
+*Examining how political brand positioning affects consumer sentiment and purchasing behaviour using NLP-based analysis of social media data.*  
+— In progress
+
+**Influencer Marketing and Machine Learning**  
+*Predicting influencer campaign effectiveness using multimodal features (text, image, engagement signals).*  
+— In progress
+
+**Causal NLP in Marketing**  
+*Applying causal inference methods to text-based marketing data to move beyond predictive correlation.*  
+— In progress
+
+---
+
+## Methods
+
+I work primarily with:
+
+- Large-scale text data (social media, reviews, brand communications)
+- Transformer-based NLP models (BERT, sentence embeddings)
+- Causal inference (instrumental variables, difference-in-differences)
+- ML pipelines in Python (scikit-learn, PyTorch, HuggingFace)
+
+---
+
+## Interactive Demos
+
+*ML research prototypes — coming soon via Hugging Face Spaces.*

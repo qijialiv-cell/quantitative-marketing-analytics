@@ -1,0 +1,32 @@
+---
+title: "Teaching"
+---
+
+## 2026 Spring — Quantitative Marketing Analytics
+
+University of Liverpool Management School
+
+**Topics covered:**
+
+- Customer Analytics & Segmentation
+- Predictive Modelling for Marketing
+- NLP and Text Analytics
+- Machine Learning Model Evaluation
+- Data Visualisation for Marketing
+
+**Student resources:**
+
+- [HCT Digital Marketing Lab](https://hct-digital-marketing-ai-lab.onrender.com) — Interactive ML lab
+- [Feedback Form](https://student-feedback-form-04kh.onrender.com) — Weekly session feedback
+
+---
+
+## Teaching Philosophy
+
+I teach marketing analytics with a focus on **interpretability over complexity** — every model output should translate into a clear marketing decision or insight. Students from non-technical backgrounds should leave with both conceptual understanding and practical skills.
+
+---
+
+## Previous Terms
+
+- **2025 Fall** — Machine Learning for Marketing, Data Visualisation, Intro to Deep Learning
