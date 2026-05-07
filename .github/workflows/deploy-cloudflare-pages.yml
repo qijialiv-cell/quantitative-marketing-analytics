@@ -7,6 +7,7 @@ on:
       - 'quarto/**'
       - 'teaching/**/slides/**'
       - 'apps/hct-ml-marketing-lab.html'
+      - 'apps/teaching_analytics/feedback_form.html'
   workflow_dispatch:
 
 permissions:
@@ -41,6 +42,8 @@ jobs:
         run: |
           mkdir -p quarto/website/_site/labs/hct-ml-lab
           cp apps/hct-ml-marketing-lab.html quarto/website/_site/labs/hct-ml-lab/index.html
+          mkdir -p quarto/website/_site/feedback
+          cp apps/teaching_analytics/feedback_form.html quarto/website/_site/feedback/index.html
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
