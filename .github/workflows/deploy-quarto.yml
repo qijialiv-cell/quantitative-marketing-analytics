@@ -6,6 +6,12 @@ on:
     paths:
       - 'quarto/**'
       - 'teaching/**/slides/**'
+      - 'apps/hct-ml-marketing-lab.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
 
 jobs:
   build-and-deploy:
@@ -31,11 +37,16 @@ jobs:
           cd quarto/website
           quarto render
 
+      - name: Add HCT ML Lab to site
+        run: |
+          mkdir -p quarto/website/_site/labs/hct-ml-lab
+          cp apps/hct-ml-marketing-lab.html quarto/website/_site/labs/hct-ml-lab/index.html
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: uol-computational-marketing
+          projectName: quantitative-marketing-analytics
           directory: quarto/website/_site
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
