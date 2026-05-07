@@ -99,6 +99,9 @@ class QuizResponseCreate(BaseModel):
 # App
 # ---------------------------------------------------------------------------
 
+# Initialise database eagerly so tables exist before any request
+init_db()
+
 app = FastAPI(
     title="Teaching Analytics API",
     description="Collect and analyse student feedback for data-driven course improvement.",
@@ -113,10 +116,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.on_event("startup")
-def startup():
-    init_db()
 
 
 # ---------------------------------------------------------------------------
