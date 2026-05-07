@@ -1,152 +1,84 @@
 ==============================================================================
   Quantitative Marketing & Marketing Analytics — Deployment Checklist
   GitHub: https://github.com/qijialiv-cell/quantitative-marketing-analytics
-  Created: 2026-05-07
+  Updated: 2026-05-07
 ==============================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 1 — 创建账号（全部免费）
+  已部署 — Render (中国可访问)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  [ ] Cloudflare    https://dash.cloudflare.com/sign-up
-                     → 主站部署 + 自定义域名 + Access 密码保护
+  [x] HCT Digital Marketing Lab (静态站点)
+      URL: https://hct-digital-marketing-ai-lab.onrender.com
+      状态: ✅ Live
 
-  [ ] Vercel        https://vercel.com/signup（GitHub 登录即可）
-                     → React 仪表盘
-
-  [ ] Render        https://render.com/register（GitHub 登录即可）
-                     → FastAPI 后端 + Streamlit Admin
-
-  [ ] Hugging Face  https://huggingface.co/join
-                     → Gradio ML Demo
+  [x] 学生反馈表单 (静态站点)
+      URL: https://student-feedback-form-04kh.onrender.com
+      状态: ✅ Live
+      注意: 表单 UI 可用，但后端 API 未部署（需绑卡），提交暂不生效
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 2 — 购买自定义域名（推荐 Cloudflare Registrar）
+  已部署 — Cloudflare Pages (中国被墙，海外可用)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  [ ] 购买 qijialiao.com（约 $10/年，Cloudflare 最便宜）
-  [ ] 在 Cloudflare DNS 中添加记录：
-      - qijialiao.com       → Cloudflare Pages（主站）
-      - dash.qijialiao.com  → Vercel（仪表盘）
-      - api.qijialiao.com   → Render（后端 API）
+  [x] HCT Digital Marketing Lab
+      URL: https://hct-digital-marketing-ai-lab.pages.dev
+      状态: ✅ Live (仅海外可访问)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 3 — Cloudflare Pages 配置
+  待部署 — 需要操作
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  [ ] 连接 GitHub 仓库 qijialiv-cell/quantitative-marketing-analytics
-  [ ] 创建项目 1 — 学术主站
-      - Root directory:  quarto/website
-      - Build command:   quarto render
-      - Output:          _site
-      - 自定义域名:      qijialiao.com
-  [ ] 创建项目 2 — 静态 Labs（或者合并到主站）
-      - 部署 HTML labs + feedback form
-  [ ] 设置 Cloudflare Access
-      - 保护路径: /labs/*
-      - 允许的邮箱域名: hct.ac.ae, liverpool.ac.uk（或手动添加学生邮箱）
-      - 免费版最多 50 个用户
-  [ ] 旧站设置 301 重定向
-      - qijialiv-cell.github.io/me/ → qijialiao.com
-      - 在 GitHub Pages 仓库中用 HTML meta redirect 即可
+  [ ] FastAPI Teaching Analytics API (Render Web Service)
+      → 需要在 Render Dashboard 绑定信用卡（不扣费，仅验证）
+      → 绑卡地址: https://dashboard.render.com/billing
+      → 绑卡后通知我，我继续创建服务
+
+  [ ] Streamlit Admin Dashboard (Render Web Service)
+      → 同上，需要绑卡
+
+  [ ] Quarto 学术主站 (Cloudflare Pages 或 Render)
+      → 需要购买域名 qijialiao.com（~$10/年）
+      → 或者先部署到 Render static site
+
+  [ ] React 学生仪表盘 (Vercel)
+      → 需要 React 代码先写好
+      → 可以后续再做
+
+  [ ] Hugging Face Spaces (Gradio ML Demo)
+      → 需要 HF Token
+      → churn_predictor 和 embedding_explorer
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 4 — Render 配置
+  账号状态
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  [ ] 创建 Web Service 1 — FastAPI 后端
-      - 连接 GitHub 仓库
-      - Root Directory:   apps/teaching_analytics
-      - Build Command:    pip install -r ../../requirements.txt
-      - Start Command:    uvicorn api.main:app --host 0.0.0.0 --port $PORT
-      - 自定义域名:       api.qijialiao.com
-
-  [ ] 创建 Web Service 2 — Streamlit Admin
-      - 连接 GitHub 仓库
-      - Root Directory:   apps/teaching_analytics
-      - Build Command:    pip install -r ../../requirements.txt
-      - Start Command:    streamlit run admin/dashboard.py --server.port $PORT
-      - 通过 Cloudflare Access 保护
-
-  [ ] 记录 Render Service ID（在 Settings 页面找到）
+  [x] GitHub       qijialiv-cell/quantitative-marketing-analytics
+  [x] Cloudflare   已有账号，API Token 已配置
+  [x] Render       已有账号，API Key 已配置
+  [ ] Vercel       未创建
+  [ ] Hugging Face 未创建
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 5 — Vercel 配置
+  GitHub Secrets 状态
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  [ ] Import GitHub 仓库
-  [ ] 等创建 React 仪表盘后配置 root directory
-  [ ] 自定义域名: dash.qijialiao.com
+  [x] CLOUDFLARE_API_TOKEN
+  [x] CLOUDFLARE_ACCOUNT_ID
+  [x] RENDER_API_KEY
+  [ ] VERCEL_TOKEN
+  [ ] VERCEL_ORG_ID
+  [ ] VERCEL_PROJECT_ID
+  [ ] HF_TOKEN
+  [ ] RENDER_SERVICE_ID
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 6 — Hugging Face Spaces 配置
+  下一步操作（按优先级）
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  [ ] 创建 Space — Churn Predictor (Gradio)
-  [ ] 创建 Space — Embedding Explorer (Gradio)
-  [ ] 生成 HF Token: https://huggingface.co/settings/tokens
+  1. 绑定 Render 信用卡 → 解锁 FastAPI + Streamlit 部署
+  2. 购买域名 qijialiao.com → 解锁自定义域名 + 中国全站可访问
+  3. 创建 Vercel 账号 → 解锁 React 仪表盘
+  4. 创建 HF 账号 → 解锁 ML Demo
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 7 — GitHub Secrets 配置
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  仓库地址: https://github.com/qijialiv-cell/quantitative-marketing-analytics
-  路径: Settings → Secrets and variables → Actions → New repository secret
-
-  Cloudflare:
-  [ ] CLOUDFLARE_API_TOKEN      （Cloudflare Dashboard → My Profile → API Tokens）
-  [ ] CLOUDFLARE_ACCOUNT_ID     （Cloudflare Dashboard → 侧栏底部）
-
-  Vercel:
-  [ ] VERCEL_TOKEN              （Vercel Dashboard → Settings → Tokens）
-  [ ] VERCEL_ORG_ID             （Vercel Dashboard → Settings → General）
-  [ ] VERCEL_PROJECT_ID         （创建项目后获得）
-
-  Hugging Face:
-  [ ] HF_TOKEN                  （HF Settings → Access Tokens）
-
-  Render:
-  [ ] RENDER_API_KEY            （Render Dashboard → Account Settings → API Keys）
-  [ ] RENDER_SERVICE_ID         （Render Service → Settings 页面）
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 8 — 旧站迁移
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  [ ] 将 qijialiv-cell.github.io/me/ 的内容迁移到 Quarto 主站
-  [ ] 旧站 index.html 添加 meta redirect:
-      <meta http-equiv="refresh" content="0;url=https://qijialiao.com">
-  [ ] 更新 Google Scholar 个人主页链接
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  环境变量存储方式
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  1. 本地开发 → .env 文件（已在 .gitignore 中，不会被提交）
-     仓库中已有 .env.example 模板，复制后填入真实值：
-       cp .env.example .env
-
-  2. 生产部署 → 各平台的 Dashboard 设置页面
-     - Cloudflare: Dashboard → Pages → 项目 → Settings → Environment variables
-     - Vercel:     Dashboard → 项目 → Settings → Environment Variables
-     - Render:     Dashboard → 服务 → Environment
-
-  3. CI/CD      → GitHub Secrets（上面 Step 7）
-     供 GitHub Actions 工作流使用，不会出现在代码或日志中
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  已完成
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  [x] GitHub 仓库创建并推送
-  [x] FastAPI Teaching Analytics 后端（10 个测试全通过）
-  [x] 学生反馈表单（静态 HTML）
-  [x] Streamlit Admin Dashboard
-  [x] Cloudflare Pages 部署工作流
-  [x] Vercel 部署工作流
-  [x] Render 部署工作流
-  [x] Quarto 网站配置（Google Scholar + 个人信息）
-  [x] README 架构图
-  [x] .env.example 环境变量模板
-  [x] requirements.txt 更新
 ==============================================================================
