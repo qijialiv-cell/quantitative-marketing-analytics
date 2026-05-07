@@ -14,6 +14,7 @@ build/
 # Environment variables — never commit secrets
 .env
 .env.*
+!.env.example
 
 # Data — raw data is large; use DVC or document sources in README
 # Uncomment if using DVC:
