@@ -1,0 +1,29 @@
+name: Deploy HCT Lab to Vercel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/hct-ml-marketing-lab.html'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare deploy directory
+        run: |
+          mkdir -p _deploy
+          cp apps/hct-ml-marketing-lab.html _deploy/index.html
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: _deploy
+          vercel-args: '--prod'

@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Digital Marketing, Marketing Analytics and AI+ — HCT Learning Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8F7FF;--bg2:#FFFFFF;--bg3:#EEF0FF;
+  --purple:#6D28D9;--purple2:#7C3AED;--purple3:rgba(109,40,217,.1);--purple4:rgba(109,40,217,.06);
+  --green:#059669;--green2:#047857;
+  --amber:#D97706;
+  --text:#1E1B4B;--text2:#374151;--text3:#6B7280;
+  --line:#E5E7EB;--line2:#D1D5DB;
+  --code-bg:#1E1B4B;
+  --kw:#C084FC;--st:#34D399;--nm:#FB923C;--fn:#60A5FA;--cm:#9CA3AF;--bi:#F472B6;
+  --sb-w:275px;--cp-w:320px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;display:flex;min-height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+aside#sidebar{width:var(--sb-w);flex-shrink:0;background:var(--bg2);border-right:1px solid var(--line);height:100vh;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;position:sticky;top:0;scrollbar-width:thin;scrollbar-color:var(--purple) #E5E7EB}
+aside#sidebar::-webkit-scrollbar{width:4px}
+aside#sidebar::-webkit-scrollbar-thumb{background:var(--purple);border-radius:2px}
+.brand{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--line);background:linear-gradient(135deg,var(--purple4),var(--bg2))}
+.brand-hct{font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;color:var(--green);margin-bottom:.35rem;font-weight:700}
+.brand-hct a{color:var(--green);text-decoration:none}
+.brand-hct a:hover{color:var(--green2);text-decoration:underline}
+.brand-name{font-family:'Fraunces',serif;font-size:1.12rem;font-weight:700;line-height:1.2;margin-bottom:.2rem;color:var(--text)}
+.brand-name em{font-style:italic;color:var(--purple2)}
+.brand-sub{font-size:.68rem;text-transform:uppercase;letter-spacing:.16em;color:var(--text3)}
+.prog-track{padding:.8rem 1.2rem;border-bottom:1px solid var(--line)}
+.prog-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:.35rem;display:flex;justify-content:space-between;font-weight:600}
+.prog-bar{height:5px;background:#E5E7EB;border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--green));border-radius:3px;transition:width .4s ease;width:0}
+.nav-sections{padding:.5rem 0 1.2rem}
+.nav-group{font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;color:var(--purple2);padding:.7rem 1.2rem .25rem;font-weight:700}
+.nav-item{display:flex;align-items:center;gap:.45rem;padding:.38rem 1.2rem;cursor:pointer;border-left:3px solid transparent;transition:all .15s;font-size:.88rem;color:var(--text3);background:none;border-top:none;border-right:none;border-bottom:none;width:100%;text-align:left;font-family:inherit;line-height:1.3;font-weight:500}
+.nav-item:hover{color:var(--purple2);background:var(--purple4)}
+.nav-item.active{color:var(--purple2);border-left-color:var(--purple);background:var(--purple3);font-weight:600}
+.nav-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--purple2);opacity:.85;flex-shrink:0}
+.nav-dot{margin-left:auto;font-size:.7rem;opacity:.4;flex-shrink:0}
+.nav-item.done .nav-dot{color:var(--green);opacity:1}
+
+/* MAIN */
+#main{flex:1;height:100vh;overflow-y:auto;overflow-x:hidden}
+#main::-webkit-scrollbar{width:6px}
+#main::-webkit-scrollbar-thumb{background:rgba(109,40,217,.3);border-radius:3px}
+
+/* HERO */
+.hero{background:linear-gradient(150deg,#EDE9FE 0%,#F0FDF4 50%,#F8F7FF 100%);padding:3.5rem 4rem 2.8rem;border-bottom:2px solid var(--line);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;top:-20%;right:-5%;width:45%;height:180%;background:radial-gradient(ellipse,rgba(109,40,217,.07),transparent 65%);pointer-events:none}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.9rem;flex-wrap:wrap;gap:.5rem}
+.hero-inst{font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;color:var(--green2);font-weight:700}
+.hero-inst a{color:var(--green2);text-decoration:none;border-bottom:1px solid rgba(5,150,105,.4);padding-bottom:.05rem}
+.hero-inst a:hover{color:var(--green)}
+.tool-pills{display:flex;gap:.4rem;flex-wrap:wrap}
+.tool-pill{font-size:.68rem;font-family:'JetBrains Mono',monospace;background:#fff;border:1.5px solid #DDD6FE;color:var(--purple2);padding:.15rem .5rem;border-radius:12px;white-space:nowrap;font-weight:500}
+h1.hero-title{font-family:'Fraunces',serif;font-size:clamp(2rem,3.2vw,3.2rem);line-height:1.06;font-weight:700;letter-spacing:-.025em;margin-bottom:.9rem;max-width:22ch;color:var(--text)}
+h1.hero-title em{font-style:italic;font-weight:500;color:var(--purple2)}
+.hero-lede{color:var(--text2);max-width:58ch;font-size:1rem;margin-bottom:1.8rem}
+.hero-stats{display:flex;gap:2.5rem;border-top:1px solid rgba(109,40,217,.2);padding-top:1.3rem;flex-wrap:wrap}
+.hero-stat dt{font-size:.68rem;text-transform:uppercase;letter-spacing:.16em;color:var(--purple2);margin-bottom:.2rem;font-weight:600}
+.hero-stat dd{font-size:.95rem;font-weight:600;color:var(--text)}
+.attr-badge{margin-top:1.2rem;padding:.65rem 1rem;background:rgba(5,150,105,.07);border:1.5px solid rgba(5,150,105,.2);border-radius:6px;font-size:.82rem;color:var(--text3);line-height:1.6}
+.attr-badge strong{color:var(--green2);font-weight:600}
+
+/* CHAPTER */
+.chapter{padding:3rem 4rem 2.5rem;border-bottom:1px solid var(--line)}
+.ch-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:var(--purple2);margin-bottom:.55rem;font-weight:600}
+h2.ch-title{font-family:'Fraunces',serif;font-size:2rem;line-height:1.1;font-weight:700;letter-spacing:-.02em;margin-bottom:1.2rem;color:var(--text)}
+h2.ch-title em{font-style:italic;color:var(--green);font-weight:500}
+h3.sec-head{font-family:'Fraunces',serif;font-size:1.3rem;margin:2rem 0 .55rem;font-weight:600;color:var(--text)}
+h3.ex-head{display:flex;align-items:baseline;gap:.7rem;border-top:2px solid var(--line);padding-top:2rem;margin:2.5rem 0 .6rem}
+h3.ex-head .ex-n{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--purple2);font-weight:600}
+h4.step-head{font-size:1rem;color:var(--green2);font-weight:700;margin:1.4rem 0 .45rem}
+p{color:var(--text2);margin-bottom:.9rem;font-size:1rem}
+strong{color:var(--text);font-weight:700}
+em.inline{color:var(--purple2);font-style:italic}
+ul,ol{color:var(--text2);padding-left:1.5rem;margin:.4rem 0 1rem;font-size:.97rem}
+li{margin-bottom:.35rem}
+li::marker{color:var(--purple2)}
+code.ic{font-family:'JetBrains Mono',monospace;font-size:.82em;background:#EDE9FE;color:var(--purple2);padding:.15em .4em;border-radius:4px;font-weight:500}
+
+.concept-box{background:linear-gradient(135deg,#F5F3FF,#F0FDF4);border:1.5px solid #DDD6FE;border-radius:8px;padding:1rem 1.2rem;margin:1rem 0 1.3rem;position:relative}
+.concept-box::before{content:"CONCEPT";font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.2em;background:var(--purple2);color:#fff;padding:.12rem .45rem;border-radius:3px;position:absolute;top:-9px;left:.9rem;font-weight:700}
+.concept-box p{color:var(--text2);font-size:.97rem;margin:0}
+
+.lab-btn{display:flex;align-items:center;gap:.55rem;background:var(--purple3);border:1.5px solid #C4B5FD;color:var(--purple2);padding:.55rem 1.1rem;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.04em;transition:all .18s;margin:1rem 0;text-transform:uppercase}
+.lab-btn:hover{background:#DDD6FE;border-color:var(--purple)}
+.lab-btn .chev{transition:transform .28s;font-style:normal;font-size:.78rem}
+.lab-btn.open .chev{transform:rotate(180deg)}
+.lab-wrap{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.lab-wrap.open{max-height:9999px}
+
+.code-wrap{border-radius:8px;background:var(--code-bg);border:1px solid #312E81;margin:.9rem 0;overflow:hidden;box-shadow:0 2px 8px rgba(109,40,217,.12)}
+.code-head{display:flex;justify-content:space-between;align-items:center;padding:.45rem .9rem;background:rgba(109,40,217,.3);border-bottom:1px solid rgba(255,255,255,.1)}
+.code-lbl{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.14em;color:#C4B5FD;font-weight:600}
+.cp-btn{background:transparent;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.6);font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.15rem .45rem;border-radius:3px;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;transition:all .15s}
+.cp-btn:hover{background:var(--purple2);color:#fff;border-color:var(--purple2)}
+.cp-btn.ok{background:var(--green);color:#fff;border-color:var(--green)}
+pre{margin:0;padding:.9rem 1rem;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.83rem;line-height:1.65;color:#E0E7FF}
+pre::-webkit-scrollbar{height:4px}
+pre::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:2px}
+.kw{color:var(--kw)}.st{color:var(--st)}.nm{color:var(--nm)}.fn{color:var(--fn)}.cm{color:var(--cm);font-style:italic}.bi{color:var(--bi)}
+
+.callout{border-left:4px solid var(--purple2);background:#F5F3FF;padding:.85rem 1.1rem;border-radius:0 6px 6px 0;margin:1.1rem 0}
+.callout-tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;color:var(--purple2);display:block;margin-bottom:.3rem;font-weight:700}
+.callout p{font-size:.95rem;margin:0;color:var(--text2)}
+.callout.tip{border-left-color:var(--green);background:#F0FDF4}.callout.tip .callout-tag{color:var(--green2)}
+.callout.warn{border-left-color:var(--amber);background:#FFFBEB}.callout.warn .callout-tag{color:var(--amber)}
+
+.colab-btn{display:inline-flex;align-items:center;gap:.45rem;background:var(--purple2);color:#fff;font-weight:700;font-size:.82rem;padding:.48rem .95rem;border-radius:5px;text-decoration:none;transition:all .15s;margin:.5rem 0;box-shadow:0 1px 4px rgba(109,40,217,.3)}
+.colab-btn:hover{background:var(--purple)}
+
+.out-wrap{margin:.7rem 0 1.1rem;border-radius:6px;background:#F1F5F9;border:1.5px dashed #CBD5E1;padding:.8rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:#334155;white-space:pre;overflow-x:auto;line-height:1.6}
+.out-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;color:var(--purple2);margin-bottom:.35rem;font-family:'JetBrains Mono',monospace;font-weight:700}
+
+.sim-box{background:#F5F3FF;border:1.5px solid #DDD6FE;border-radius:8px;padding:1.1rem;margin:1rem 0}
+.sim-lbl{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;color:var(--purple2);margin-bottom:.65rem;font-weight:700}
+.sim-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem;font-size:.88rem}
+.sim-row label{color:var(--text3);min-width:120px;font-size:.85rem;font-weight:500}
+.sim-row input[type=range]{flex:1;accent-color:var(--purple2);cursor:pointer}
+.sim-val{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--purple2);min-width:40px;text-align:right;font-weight:700}
+
+.try-it{margin:1.8rem 0 0;padding:1.1rem 1.3rem;background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:8px}
+.try-it h4{color:var(--green2);font-family:'Fraunces',serif;font-size:1.05rem;margin-bottom:.45rem;font-weight:700}
+.try-it li{font-size:.95rem}
+
+.takeaway{margin-top:1.5rem;padding:1.1rem 1.4rem;background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(5,150,105,.06));border:1.5px solid rgba(109,40,217,.2);border-radius:8px}
+.takeaway-tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:var(--green2);margin-bottom:.35rem;display:block;font-weight:700}
+.takeaway p{color:var(--text);font-size:.98rem;font-weight:600;margin:0}
+
+.spark{border-bottom:2px dashed #C4B5FD;cursor:pointer;color:inherit;transition:color .15s;display:inline-flex;align-items:center;gap:.18rem}
+.spark:hover{color:var(--purple2)}
+.spark-i{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;background:var(--purple2);color:#fff;border-radius:50%;font-size:.55rem;font-weight:700;font-style:normal;flex-shrink:0}
+
+table.ref-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem}
+table.ref-table th{text-align:left;padding:.55rem .8rem;border-bottom:2px solid var(--purple2);color:var(--purple2);font-weight:700;text-transform:uppercase;font-size:.68rem;letter-spacing:.08em;background:#F5F3FF}
+table.ref-table td{padding:.5rem .8rem;border-bottom:1px solid var(--line);color:var(--text2)}
+table.ref-table tbody tr:hover{background:var(--purple4)}
+table.ref-table td code.ic{font-size:.8rem}
+
+/* COPILOT */
+#copilot{width:var(--cp-w);flex-shrink:0;background:var(--bg2);border-left:2px solid var(--line);height:100vh;display:flex;flex-direction:column;position:sticky;top:0;transition:width .32s cubic-bezier(.4,0,.2,1);overflow:hidden}
+#copilot.collapsed{width:44px}
+#copilot.collapsed .copilot-inner{opacity:0;pointer-events:none}
+.copilot-inner{display:flex;flex-direction:column;flex:1;overflow:hidden;opacity:1;transition:opacity .2s}
+.copilot-toggle{position:absolute;top:50%;transform:translateY(-50%);left:-15px;z-index:10;width:30px;height:30px;border-radius:50%;background:var(--purple2);border:2.5px solid var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.78rem;color:#fff;font-weight:700;transition:left .32s;box-shadow:0 2px 10px rgba(109,40,217,.3);flex-shrink:0}
+#copilot.collapsed .copilot-toggle{left:8px}
+.cp-header{padding:.95rem 1rem .8rem;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:.5rem;background:var(--purple4)}
+.cp-title{font-family:'Fraunces',serif;font-size:.98rem;font-weight:700;white-space:nowrap;color:var(--text)}
+.cp-title span{color:var(--purple2)}
+.tone-row{display:flex;gap:3px;background:#E5E7EB;border-radius:20px;padding:3px;flex-shrink:0}
+.tone-btn{padding:.2rem .58rem;border-radius:16px;border:none;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;cursor:pointer;transition:all .18s;background:transparent;color:var(--text3);font-family:inherit;white-space:nowrap}
+.tone-btn.active{background:var(--purple2);color:#fff;box-shadow:0 1px 4px rgba(109,40,217,.3)}
+
+.sparks-strip{padding:.55rem .9rem .45rem;border-bottom:1px solid var(--line);flex-shrink:0}
+.sparks-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;color:var(--text3);margin-bottom:.32rem;font-weight:600}
+.spark-chips{display:flex;flex-wrap:wrap;gap:.3rem}
+.spark-chip{font-size:.68rem;background:#EDE9FE;border:1.5px solid #DDD6FE;color:var(--purple2);padding:.13rem .42rem;border-radius:12px;cursor:pointer;transition:all .15s;font-family:'JetBrains Mono',monospace;white-space:nowrap;font-weight:600}
+.spark-chip:hover{background:#DDD6FE;border-color:var(--purple2)}
+
+.cp-msgs{flex:1;overflow-y:auto;padding:.65rem;display:flex;flex-direction:column;gap:.55rem;scrollbar-width:thin;scrollbar-color:#C4B5FD #F5F3FF}
+.cp-msgs::-webkit-scrollbar{width:3px}
+.cp-msgs::-webkit-scrollbar-thumb{background:#C4B5FD;border-radius:2px}
+.msg{padding:.65rem .8rem;border-radius:8px;font-size:.85rem;line-height:1.55;max-width:96%}
+.msg.ta{background:#F5F3FF;border:1px solid #DDD6FE;align-self:flex-start}
+.msg.user{background:var(--purple3);align-self:flex-end;text-align:right;font-size:.83rem;border:1px solid #DDD6FE}
+.msg.ta strong.ta-label{color:var(--purple2);display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.28rem;font-weight:700}
+.msg.ta code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:#EDE9FE;color:var(--purple2);padding:.1em .3em;border-radius:3px}
+.msg.typing{display:flex;align-items:center;gap:4px;padding:.65rem .8rem}
+.dot{width:6px;height:6px;background:var(--purple2);border-radius:50%;animation:bounce .9s infinite}
+.dot:nth-child(2){animation-delay:.18s}.dot:nth-child(3){animation-delay:.36s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+
+.cp-footer{padding:.65rem .7rem;border-top:1px solid var(--line);flex-shrink:0;background:var(--bg)}
+.audit-btn{width:100%;background:var(--purple4);border:1.5px dashed #C4B5FD;color:var(--purple2);padding:.42rem;border-radius:5px;font-size:.72rem;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;transition:all .15s;margin-bottom:.42rem;display:block;text-align:center;font-weight:700}
+.audit-btn:hover{background:#EDE9FE}
+.audit-area{width:100%;background:#F8F7FF;border:1.5px solid #DDD6FE;border-radius:5px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.5rem;resize:vertical;display:none;min-height:70px;max-height:115px;outline:none}
+.audit-area.open{display:block}
+.audit-area:focus{border-color:var(--purple2)}
+.audit-submit{width:100%;margin-top:.3rem;background:var(--purple2);border:none;color:#fff;border-radius:5px;padding:.38rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.05em;text-transform:uppercase;display:none}
+.audit-submit.open{display:block}
+.send-row{display:flex;gap:.35rem;margin-top:.45rem}
+.chat-input{flex:1;background:#fff;border:1.5px solid #DDD6FE;border-radius:5px;color:var(--text);font-family:'Inter',sans-serif;font-size:.83rem;padding:.4rem .6rem;outline:none}
+.chat-input::placeholder{color:var(--text3)}
+.chat-input:focus{border-color:var(--purple2);box-shadow:0 0 0 3px rgba(109,40,217,.1)}
+.send-btn{background:var(--purple2);border:none;color:#fff;border-radius:5px;width:32px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:opacity .15s;flex-shrink:0}
+.send-btn:hover{opacity:.85}
+
+/* FOOTER */
+.site-footer{padding:3rem 4rem 2.5rem;border-top:2px solid var(--line);background:linear-gradient(135deg,#EDE9FE,#F0FDF4)}
+.footer-inner{display:grid;grid-template-columns:1fr 2fr 1fr;gap:2.5rem}
+.footer-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;display:block;margin-bottom:.2rem;color:var(--text)}
+.footer-sub{font-size:.7rem;color:var(--green2);text-transform:uppercase;letter-spacing:.12em;display:block;font-weight:700}
+.footer-ack h3,.footer-tools h3{font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--purple2);margin-bottom:.6rem;font-family:'JetBrains Mono',monospace;font-weight:700}
+.footer-ack p{font-size:.85rem;color:var(--text3);line-height:1.7}
+.footer-ack strong{color:var(--green2);font-weight:700}
+.footer-ack a{color:var(--green2);text-decoration:none}
+.footer-ack a:hover{text-decoration:underline}
+.footer-tools p{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text3);line-height:1.7}
+.footer-copy{grid-column:1/-1;border-top:1px solid rgba(109,40,217,.15);padding-top:1rem;margin-top:.5rem;font-size:.78rem;color:var(--text3);text-align:center}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<aside id="sidebar">
+  <div class="brand">
+    <div class="brand-hct"><a href="https://hct.ac.ae/en" target="_blank">Higher Colleges of Technology</a></div>
+    <div class="brand-name">Digital Marketing,<br><em>Marketing Analytics &amp; AI+</em></div>
+    <div class="brand-sub">HCT Applied Learning Lab</div>
+  </div>
+  <div class="prog-track">
+    <div class="prog-label"><span>Lab Progress</span><span id="prog-pct">0%</span></div>
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+  </div>
+  <nav class="nav-sections">
+    <div class="nav-group">Foundations</div>
+    <button class="nav-item" data-sec="s0" onclick="navTo('s0')"><span class="nav-num">W1</span>Intro: Why ML for Mktg?<span class="nav-dot" id="nd-s0">○</span></button>
+    <button class="nav-item" data-sec="s1" onclick="navTo('s1')"><span class="nav-num">W2</span>sklearn &amp; First Model<span class="nav-dot" id="nd-s1">○</span></button>
+    <button class="nav-item" data-sec="s2" onclick="navTo('s2')"><span class="nav-num">W3</span>Evaluation &amp; Cross-Val<span class="nav-dot" id="nd-s2">○</span></button>
+    <button class="nav-item" data-sec="s3" onclick="navTo('s3')"><span class="nav-num">W4</span>Hyperparameter Tuning<span class="nav-dot" id="nd-s3">○</span></button>
+    <div class="nav-group">Applied</div>
+    <button class="nav-item" data-sec="s4" onclick="navTo('s4')"><span class="nav-num">W5</span>Pipelines &amp; Feature Eng.<span class="nav-dot" id="nd-s4">○</span></button>
+    <button class="nav-item" data-sec="s5" onclick="navTo('s5')"><span class="nav-num">W6</span>Tree Models &amp; Ensemble<span class="nav-dot" id="nd-s5">○</span></button>
+    <button class="nav-item" data-sec="s6" onclick="navTo('s6')"><span class="nav-num">W7</span>AutoML<span class="nav-dot" id="nd-s6">○</span></button>
+    <div class="nav-group">Deployment</div>
+    <button class="nav-item" data-sec="s7" onclick="navTo('s7')"><span class="nav-num">W8</span>Deploy with Gradio<span class="nav-dot" id="nd-s7">○</span></button>
+    <button class="nav-item" data-sec="s8" onclick="navTo('s8')"><span class="nav-num">W9</span>Kaggle Full Workflow<span class="nav-dot" id="nd-s8">○</span></button>
+    <div class="nav-group">Reference</div>
+    <button class="nav-item" data-sec="s9" onclick="navTo('s9')"><span class="nav-num">A</span>Cheatsheet &amp; Debug<span class="nav-dot" id="nd-s9">○</span></button>
+  </nav>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<div id="main">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-inst"><a href="https://hct.ac.ae/en" target="_blank">Higher Colleges of Technology</a> · ML in Marketing</div>
+    <div class="tool-pills">
+      <span class="tool-pill">🔬 Colab</span>
+      <span class="tool-pill">🤗 HuggingFace</span>
+      <span class="tool-pill">⚡ GitHub</span>
+      <span class="tool-pill">🎨 Gradio</span>
+      <span class="tool-pill">🧠 sklearn</span>
+      <span class="tool-pill">🚀 AutoML</span>
+    </div>
+  </div>
+  <h1 class="hero-title">Digital Marketing,<br><em>Marketing Analytics &amp; AI+</em></h1>
+  <p class="hero-lede">A hands-on, 10-week applied course for non-programmers. Every concept starts with a marketing analogy, then becomes runnable Python code. No prior coding experience required — just business curiosity and a Google account.</p>
+  <dl class="hero-stats">
+    <div class="hero-stat"><dt>Weeks</dt><dd>10 modules</dd></div>
+    <div class="hero-stat"><dt>Tools</dt><dd>Colab · HF · Gradio · GitHub</dd></div>
+    <div class="hero-stat"><dt>AI Co-Pilot</dt><dd>Student &amp; Manager modes</dd></div>
+    <div class="hero-stat"><dt>Final Project</dt><dd>Live Kaggle deployment</dd></div>
+  </dl>
+  <div class="attr-badge">🙏 <strong>Design credit:</strong> This interactive lab is adapted from the <strong>Gies iMBA Learning Lab</strong> (Gies College of Business, UIUC). The three-panel layout, collapsible lab pattern, AI co-pilot concept, and Canvas simulations are innovations from that original framework. This is a respectful adaptation for the ML in Marketing curriculum at <a href="https://hct.ac.ae/en" target="_blank" style="color:var(--green2)">Higher Colleges of Technology</a> — not an original creation.</div>
+</div>
+
+<!-- ══ W1 ══ -->
+<section class="chapter" id="s0">
+  <div class="ch-eyebrow">Week 1 · Introduction</div>
+  <h2 class="ch-title">Why <em>ML for Marketing?</em></h2>
+  <p>Machine learning is not magic — it is a systematic way of finding patterns in data at a scale humans cannot match manually. As a marketer, you already possess the most valuable skill: you understand <strong>what question to ask</strong>. ML gives you the tools to answer it at scale.</p>
+  <div class="concept-box"><p><strong>The core loop:</strong> You have data about customers → ML finds the pattern → the pattern predicts future behaviour → you act on that prediction. Everything in this course is a variation on that loop.</p></div>
+  <p>We distinguish two types: <strong>Supervised</strong> (you provide the answer key — e.g., which customers churned) and <strong>Unsupervised</strong> (the algorithm discovers structure — e.g., natural customer segments). Marketing primarily uses supervised learning.</p>
+  <p><strong>Key vocabulary:</strong> A <em class="inline">feature</em> is any known information about a customer (age, purchase history, email open rate). A <em class="inline">label</em> is what you want to predict (did they buy? will they churn?). Your model learns the relationship between features and labels from historical data.</p>
+
+  <button class="lab-btn" onclick="toggleLab('l0',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l0">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 1.1</span> Setting Up Your Colab Environment</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Setup</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># ── Cell 1: Install & import everything for this course ──</span>
+!pip install scikit-learn pandas matplotlib seaborn --quiet
+
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">import</span> seaborn <span class="kw">as</span> sns
+
+<span class="bi">print</span>(<span class="st">"✅ Environment ready! Let's do some marketing ML."</span>)</code></pre>
+    </div>
+
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 1.2</span> Loading a Real Marketing Dataset</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Load Data</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># ── Cell 2: Load UCI Bank Marketing dataset ──</span>
+url = <span class="st">"https://raw.githubusercontent.com/datasciencedojo/datasets/master/bank-additional.csv"</span>
+df = pd.<span class="fn">read_csv</span>(url, sep=<span class="st">";"</span>)
+
+<span class="bi">print</span>(<span class="st">f"Shape: {df.shape}"</span>)
+<span class="bi">print</span>(<span class="st">f"Columns: {df.columns.tolist()}"</span>)
+df.<span class="fn">head</span>()</code></pre>
+    </div>
+
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 1.3</span> Your First Exploratory Data Analysis</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · EDA</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># ── Cell 3: Understand the target variable ──</span>
+<span class="bi">print</span>(<span class="st">"=== Target Distribution ==="</span>)
+<span class="bi">print</span>(df[<span class="st">"y"</span>].<span class="fn">value_counts</span>())
+<span class="bi">print</span>(df[<span class="st">"y"</span>].<span class="fn">value_counts</span>(normalize=<span class="kw">True</span>).<span class="fn">round</span>(<span class="nm">3</span>))
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="nm">8</span>,<span class="nm">4</span>))
+<span class="kw">for</span> outcome <span class="kw">in</span> [<span class="st">"no"</span>, <span class="st">"yes"</span>]:
+    ax.<span class="fn">hist</span>(df[df[<span class="st">"y"</span>]==outcome][<span class="st">"age"</span>], bins=<span class="nm">30</span>, alpha=<span class="nm">.6</span>, label=<span class="st">f"Subscribed: {outcome}"</span>)
+ax.<span class="fn">set_xlabel</span>(<span class="st">"Age"</span>); ax.<span class="fn">legend</span>(); plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()</code></pre>
+    </div>
+    <div class="out-wrap"><div class="out-lbl">Output</div>=== Target Distribution ===
+no     36548   (88.7%)
+yes     4640   (11.3%)</div>
+    <div class="callout tip"><span class="callout-tag">Marketing insight</span><p>Only 11.3% of contacts subscribed — a class imbalance. If we predicted "no" for everyone, we'd be right 88.7% of the time! This is why Accuracy is misleading for marketing ML. We fix this in Week 3.</p></div>
+    <div class="try-it"><h4>Try it yourself</h4><ol><li>How many unique job types are in the dataset? Use <code class="ic">df["job"].value_counts()</code></li><li>What is the average campaign calls for subscribers vs non-subscribers? Use <code class="ic">df.groupby("y")["campaign"].mean()</code></li><li>Install Hugging Face datasets: <code class="ic">!pip install datasets</code> then <code class="ic">from datasets import load_dataset</code></li></ol></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 1 Takeaway</span><p>ML does not replace marketing judgment — it amplifies it. Your job is to know what question to ask; Python's job is to find the pattern at scale.</p></div>
+</section>
+
+<!-- ══ W2 ══ -->
+<section class="chapter" id="s1">
+  <div class="ch-eyebrow">Week 2 · sklearn Foundations</div>
+  <h2 class="ch-title">sklearn Blocks &amp; <em>Your First Model</em></h2>
+  <p>The <code class="ic">scikit-learn</code> library follows one consistent interface: <strong>fit → predict → score</strong>. Learn these three methods once and you can use any of the 50+ models in the library. The pattern is identical whether predicting house prices or customer churn.</p>
+  <div class="concept-box"><p><strong>The fundamental principle:</strong> We train on past data to predict future data we have never seen. This is why we <em>hold out</em> some data for testing — testing on training data just checks whether the model memorised history, not whether it can generalise.</p></div>
+
+  <button class="lab-btn" onclick="toggleLab('l1',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l1">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 2.1</span> Train/Test Split + Linear Regression</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Regression</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">import</span> pandas <span class="kw">as</span> pd; <span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LinearRegression
+
+np.random.<span class="fn">seed</span>(<span class="nm">42</span>); n = <span class="nm">500</span>
+df = pd.<span class="fn">DataFrame</span>({
+    <span class="st">"ad_spend"</span>:    np.random.<span class="fn">uniform</span>(<span class="nm">1000</span>, <span class="nm">50000</span>, n),
+    <span class="st">"email_opens"</span>: np.random.<span class="fn">randint</span>(<span class="nm">50</span>, <span class="nm">2000</span>, n),
+    <span class="st">"social_posts"</span>:np.random.<span class="fn">randint</span>(<span class="nm">5</span>, <span class="nm">100</span>, n),
+})
+df[<span class="st">"revenue"</span>] = (<span class="nm">3.5</span>*df[<span class="st">"ad_spend"</span>] + <span class="nm">12</span>*df[<span class="st">"email_opens"</span>]
+    + <span class="nm">300</span>*df[<span class="st">"social_posts"</span>] + np.random.<span class="fn">normal</span>(<span class="nm">0</span>,<span class="nm">8000</span>,n))
+
+X = df[[<span class="st">"ad_spend"</span>,<span class="st">"email_opens"</span>,<span class="st">"social_posts"</span>]]; y = df[<span class="st">"revenue"</span>]
+X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=<span class="nm">.2</span>, random_state=<span class="nm">42</span>)
+
+model = <span class="fn">LinearRegression</span>().<span class="fn">fit</span>(X_train, y_train)
+<span class="bi">print</span>(<span class="st">f"R² on test set: {model.score(X_test, y_test):.3f}"</span>)
+<span class="bi">print</span>(<span class="st">"Coefficients:"</span>, <span class="bi">dict</span>(<span class="fn">zip</span>(X.columns, model.coef_.<span class="fn">round</span>(<span class="nm">2</span>))))</code></pre>
+    </div>
+
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 2.2</span> Classification — Predicting Purchase Intent</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Classification</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> classification_report, ConfusionMatrixDisplay
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="cm"># Numeric columns from the bank dataset loaded in Week 1</span>
+num_cols = [<span class="st">"age"</span>,<span class="st">"campaign"</span>,<span class="st">"pdays"</span>,<span class="st">"previous"</span>]
+X2 = df[num_cols].<span class="fn">fillna</span>(<span class="nm">0</span>)
+y2 = (df[<span class="st">"y"</span>] == <span class="st">"yes"</span>).<span class="fn">astype</span>(<span class="bi">int</span>)
+
+X_tr,X_te,y_tr,y_te = train_test_split(X2, y2, test_size=<span class="nm">.2</span>, random_state=<span class="nm">42</span>)
+clf = <span class="fn">LogisticRegression</span>(max_iter=<span class="nm">1000</span>).<span class="fn">fit</span>(X_tr, y_tr)
+
+<span class="bi">print</span>(<span class="fn">classification_report</span>(y_te, clf.<span class="fn">predict</span>(X_te)))
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="nm">4</span>,<span class="nm">4</span>))
+<span class="fn">ConfusionMatrixDisplay</span>.<span class="fn">from_estimator</span>(clf, X_te, y_te, ax=ax)
+plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()</code></pre>
+    </div>
+
+    <h4 class="step-head">Live Simulation — Train/Test Split Visualiser</h4>
+    <div class="sim-box">
+      <div class="sim-lbl">⚡ Adjust test size and watch the split change</div>
+      <div class="sim-row"><label>Test size</label><input type="range" min="10" max="50" value="20" step="1" id="split-sl" oninput="drawSplit()"><span class="sim-val" id="split-val">20%</span></div>
+      <canvas id="splitCanvas" style="width:100%;height:85px;display:block;margin-top:.4rem"></canvas>
+    </div>
+    <div class="callout"><span class="callout-tag">Regression vs Classification</span><p><strong>Regression</strong> predicts a number (lifetime value, expected spend). <strong>Classification</strong> predicts a category (will buy / won't buy). The sklearn interface is identical — only the output and metric change.</p></div>
+    <div class="try-it"><h4>Try it yourself</h4><ol><li>Change <code class="ic">test_size=0.3</code>. Does R² improve or worsen? Why?</li><li>Try <code class="ic">LogisticRegression(class_weight="balanced")</code>. How does the recall for class 1 change?</li><li>Use the model to predict revenue for a new campaign: <code class="ic">model.predict([[20000, 500, 30]])</code></li></ol></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 2 Takeaway</span><p>sklearn's unified <code class="ic">fit → predict → score</code> interface means you can swap any model with two lines of code. Master the workflow once, then experiment freely.</p></div>
+</section>
+
+<!-- ══ W3 ══ -->
+<section class="chapter" id="s2">
+  <div class="ch-eyebrow">Week 3 · Evaluation &amp; Cross-Validation</div>
+  <h2 class="ch-title">Are We <em>Actually Good?</em></h2>
+  <p>A single train/test split is like running one A/B test in one city and calling it global truth. The result depends on <em class="inline">which</em> 20% you happened to hold out — different random seeds give meaningfully different scores. <strong>Cross-validation</strong> fixes this by rotating through every part of your data as the test set.</p>
+  <div class="concept-box"><p><strong>The K-Fold analogy:</strong> You want to test whether a new loyalty email works. Instead of testing only on your Dubai customers, you test on Dubai, Abu Dhabi, Sharjah, Al Ain, and RAK separately, then average. That is 5-Fold Cross-Validation. Each emirate is one "fold."</p></div>
+
+  <button class="lab-btn" onclick="toggleLab('l2',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l2">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 3.1</span> Why a Single Split Lies — K-Fold Solution</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · The variance problem</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split, cross_val_score, StratifiedKFold
+<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> make_classification
+
+X, y = make_classification(n_samples=<span class="nm">1000</span>, n_features=<span class="nm">10</span>, random_state=<span class="nm">0</span>)
+model = <span class="fn">RandomForestClassifier</span>(n_estimators=<span class="nm">50</span>, random_state=<span class="nm">1</span>)
+
+<span class="cm"># Same model, 20 different splits → how much do scores vary?</span>
+scores = [train_test_split(X,y,test_size=<span class="nm">.2</span>,random_state=s) <span class="kw">for</span> s <span class="kw">in</span> <span class="bi">range</span>(<span class="nm">20</span>)]
+single_scores = [model.<span class="fn">fit</span>(Xtr,ytr).<span class="fn">score</span>(Xte,yte) <span class="kw">for</span> Xtr,Xte,ytr,yte <span class="kw">in</span> scores]
+<span class="bi">print</span>(<span class="st">f"Single-split range: {min(single_scores):.3f} to {max(single_scores):.3f}"</span>)
+
+<span class="cm"># 5-Fold CV: stable mean ± honest uncertainty</span>
+skf = <span class="fn">StratifiedKFold</span>(n_splits=<span class="nm">5</span>, shuffle=<span class="kw">True</span>, random_state=<span class="nm">42</span>)
+cv = <span class="fn">cross_val_score</span>(model, X, y, cv=skf, scoring=<span class="st">"accuracy"</span>)
+<span class="bi">print</span>(<span class="st">f"5-Fold CV: {cv.mean():.3f} ± {cv.std():.3f}"</span>)
+<span class="bi">print</span>(<span class="st">f"Per-fold:  {cv.round(3)}"</span>)</code></pre>
+    </div>
+    <div class="out-wrap"><div class="out-lbl">Output</div>Single-split range: 0.885 to 0.940
+5-Fold CV: 0.913 ± 0.014
+Per-fold:  [0.900 0.920 0.905 0.935 0.905]</div>
+
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 3.2</span> Evaluation Metrics — The Full Picture</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Metrics + ROC Curve</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">from</span> sklearn.metrics <span class="kw">import</span> classification_report, roc_auc_score, RocCurveDisplay
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
+<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> make_classification
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+X, y = make_classification(n_samples=<span class="nm">5000</span>, weights=[<span class="nm">.89</span>,<span class="nm">.11</span>], random_state=<span class="nm">0</span>)
+X_tr,X_te,y_tr,y_te = train_test_split(X, y, test_size=<span class="nm">.2</span>, stratify=y, random_state=<span class="nm">42</span>)
+
+naive = np.<span class="fn">zeros_like</span>(y_te)
+<span class="bi">print</span>(<span class="st">f"Naive accuracy (predict all 'no'): {(naive==y_te).mean():.3f}"</span>)
+
+clf = <span class="fn">LogisticRegression</span>(class_weight=<span class="st">"balanced"</span>, max_iter=<span class="nm">1000</span>).<span class="fn">fit</span>(X_tr, y_tr)
+<span class="bi">print</span>(<span class="fn">classification_report</span>(y_te, clf.<span class="fn">predict</span>(X_te)))
+<span class="bi">print</span>(<span class="st">f"AUC-ROC: {roc_auc_score(y_te, clf.predict_proba(X_te)[:,1]):.3f}"</span>)
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="nm">5</span>,<span class="nm">5</span>))
+<span class="fn">RocCurveDisplay</span>.<span class="fn">from_estimator</span>(clf, X_te, y_te, ax=ax)
+ax.<span class="fn">plot</span>([<span class="nm">0</span>,<span class="nm">1</span>],[<span class="nm">0</span>,<span class="nm">1</span>],<span class="st">"k--"</span>,label=<span class="st">"Random"</span>); ax.<span class="fn">legend</span>(); plt.<span class="fn">show</span>()</code></pre>
+    </div>
+
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 3.3</span> Stratified K-Fold Inside a Pipeline — The Correct Way</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · CV + Pipeline</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">from</span> sklearn.pipeline <span class="kw">import</span> Pipeline
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> cross_validate, StratifiedKFold
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+pipe = <span class="fn">Pipeline</span>([
+    (<span class="st">"scaler"</span>, <span class="fn">StandardScaler</span>()),
+    (<span class="st">"clf"</span>,    <span class="fn">LogisticRegression</span>(class_weight=<span class="st">"balanced"</span>, max_iter=<span class="nm">1000</span>)),
+])
+
+skf = <span class="fn">StratifiedKFold</span>(n_splits=<span class="nm">5</span>, shuffle=<span class="kw">True</span>, random_state=<span class="nm">42</span>)
+results = <span class="fn">cross_validate</span>(pipe, X, y, cv=skf,
+                          scoring=[<span class="st">"accuracy"</span>,<span class="st">"f1"</span>,<span class="st">"roc_auc"</span>],
+                          return_train_score=<span class="kw">True</span>)
+
+summary = pd.<span class="fn">DataFrame</span>({
+    m: {<span class="st">"mean"</span>:results[<span class="st">f"test_{m}"</span>].<span class="fn">mean</span>(), <span class="st">"std"</span>:results[<span class="st">f"test_{m}"</span>].<span class="fn">std</span>()}
+    <span class="kw">for</span> m <span class="kw">in</span> [<span class="st">"accuracy"</span>,<span class="st">"f1"</span>,<span class="st">"roc_auc"</span>]
+}).<span class="fn">T</span>.<span class="fn">round</span>(<span class="nm">3</span>)
+<span class="bi">print</span>(summary)</code></pre>
+    </div>
+    <div class="callout warn"><span class="callout-tag">Critical rule — Data Leakage</span><p>Always run cross-validation <em>inside</em> a Pipeline. If you scale all data first and then CV, test folds can "see" training statistics — that is data leakage. The Pipeline refits the scaler only on each training fold automatically.</p></div>
+
+    <h4 class="step-head">Live Simulation — K-Fold Visualiser</h4>
+    <div class="sim-box">
+      <div class="sim-lbl">⚡ Adjust K to see how folds rotate through your data</div>
+      <div class="sim-row"><label>Number of folds K</label><input type="range" min="2" max="10" value="5" step="1" id="kfold-sl" oninput="drawKFold()"><span class="sim-val" id="kfold-val">5</span></div>
+      <canvas id="cvCanvas" style="width:100%;height:135px;display:block;margin-top:.4rem"></canvas>
+    </div>
+    <div class="try-it"><h4>Try it yourself</h4><ol><li>Compare <code class="ic">cross_val_score(..., scoring="f1")</code> vs <code class="ic">scoring="accuracy"</code> on imbalanced data. Which tells the truer story?</li><li>Try <code class="ic">cv=10</code>. Does the mean change much? Does the standard deviation go up or down?</li><li>Look up <code class="ic">TimeSeriesSplit</code> in sklearn docs. Why would you need this for weekly campaign data?</li></ol></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 3 Takeaway</span><p>Always report CV mean ± std, not a single test score. For imbalanced marketing data, AUC-ROC and F1 tell the truth that Accuracy hides. Always keep preprocessing inside a Pipeline when cross-validating.</p></div>
+</section>
+
+<!-- ══ W4 ══ -->
+<section class="chapter" id="s3">
+  <div class="ch-eyebrow">Week 4 · Hyperparameter Tuning</div>
+  <h2 class="ch-title">Finding the <em>Best Settings</em></h2>
+  <p>Every ML model ships with default settings that are "good enough" — but not optimal for your data. <strong>Hyperparameters</strong> are knobs you control before training (like <code class="ic">max_depth</code> or <code class="ic">learning_rate</code>). Tuning is systematically finding better ones.</p>
+  <div class="concept-box"><p><strong>Three strategies:</strong> Grid Search — try every combination (thorough, slow). Random Search — try random combinations (80% of the benefit at 20% of the cost). Bayesian Optuna — use past results to guide the search intelligently.</p></div>
+  <button class="lab-btn" onclick="toggleLab('l3',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l3">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 4.1</span> Grid Search &amp; Random Search</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · GridSearch + RandomSearch</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> GridSearchCV, RandomizedSearchCV
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+<span class="kw">from</span> sklearn.datasets <span class="kw">import</span> make_classification
+<span class="kw">import</span> time
+
+X, y = make_classification(n_samples=<span class="nm">2000</span>, n_features=<span class="nm">15</span>, random_state=<span class="nm">0</span>)
+X_tr,X_te,y_tr,y_te = train_test_split(X, y, test_size=<span class="nm">.2</span>, random_state=<span class="nm">42</span>)
+
+param_grid = {<span class="st">"max_depth"</span>:[<span class="nm">3</span>,<span class="nm">5</span>,<span class="nm">8</span>,<span class="nm">12</span>], <span class="st">"n_estimators"</span>:[<span class="nm">50</span>,<span class="nm">100</span>,<span class="nm">200</span>], <span class="st">"min_samples_leaf"</span>:[<span class="nm">1</span>,<span class="nm">5</span>,<span class="nm">10</span>]}
+
+t0 = time.<span class="fn">time</span>()
+gs = <span class="fn">GridSearchCV</span>(<span class="fn">RandomForestClassifier</span>(random_state=<span class="nm">42</span>), param_grid, cv=<span class="nm">5</span>, scoring=<span class="st">"roc_auc"</span>, n_jobs=-<span class="nm">1</span>)
+gs.<span class="fn">fit</span>(X_tr, y_tr)
+<span class="bi">print</span>(<span class="st">f"Grid Search  ⏱ {time.time()-t0:.1f}s | Best AUC: {gs.best_score_:.4f}"</span>)
+<span class="bi">print</span>(<span class="st">"Best:"</span>, gs.best_params_)
+
+t0 = time.<span class="fn">time</span>()
+rs = <span class="fn">RandomizedSearchCV</span>(<span class="fn">RandomForestClassifier</span>(random_state=<span class="nm">42</span>), param_grid, n_iter=<span class="nm">20</span>, cv=<span class="nm">5</span>, scoring=<span class="st">"roc_auc"</span>, random_state=<span class="nm">42</span>, n_jobs=-<span class="nm">1</span>)
+rs.<span class="fn">fit</span>(X_tr, y_tr)
+<span class="bi">print</span>(<span class="st">f"Random Search ⏱ {time.time()-t0:.1f}s | Best AUC: {rs.best_score_:.4f}"</span>)</code></pre>
+    </div>
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 4.2</span> Bayesian Tuning with Optuna</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Optuna</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code>!pip install optuna --quiet
+<span class="kw">import</span> optuna; optuna.logging.<span class="fn">set_verbosity</span>(optuna.logging.WARNING)
+
+<span class="kw">def</span> <span class="fn">objective</span>(trial):
+    m = <span class="fn">RandomForestClassifier</span>(
+        n_estimators =trial.<span class="fn">suggest_int</span>(<span class="st">"n_estimators"</span>,<span class="nm">50</span>,<span class="nm">300</span>),
+        max_depth    =trial.<span class="fn">suggest_int</span>(<span class="st">"max_depth"</span>,<span class="nm">2</span>,<span class="nm">15</span>),
+        min_samples_leaf=trial.<span class="fn">suggest_int</span>(<span class="st">"min_samples_leaf"</span>,<span class="nm">1</span>,<span class="nm">20</span>),
+        random_state=<span class="nm">42</span>)
+    <span class="kw">return</span> <span class="fn">cross_val_score</span>(m, X_tr, y_tr, cv=<span class="nm">3</span>, scoring=<span class="st">"roc_auc"</span>).<span class="fn">mean</span>()
+
+study = optuna.<span class="fn">create_study</span>(direction=<span class="st">"maximize"</span>)
+study.<span class="fn">optimize</span>(objective, n_trials=<span class="nm">40</span>, show_progress_bar=<span class="kw">True</span>)
+<span class="bi">print</span>(<span class="st">f"Optuna best AUC: {study.best_value:.4f}"</span>)
+<span class="bi">print</span>(<span class="st">"Best params:"</span>, study.best_params)</code></pre>
+    </div>
+    <h4 class="step-head">Live Simulation — Parameter Search Heatmap</h4>
+    <div class="sim-box">
+      <div class="sim-lbl">⚡ Simulated AUC across max_depth — highlighted row = your selection</div>
+      <div class="sim-row"><label>max_depth focus</label><input type="range" min="2" max="15" value="8" step="1" id="hp-sl" oninput="drawHPGrid()"><span class="sim-val" id="hp-val">8</span></div>
+      <canvas id="hpCanvas" style="width:100%;height:150px;display:block;margin-top:.4rem"></canvas>
+    </div>
+    <div class="try-it"><h4>Try it yourself</h4><ol><li>Time both searches. How much faster is Random Search for similar AUC?</li><li>Increase Optuna to <code class="ic">n_trials=80</code>. Does it keep improving or plateau?</li><li>Add <code class="ic">max_features=trial.suggest_float("max_features",0.3,1.0)</code> to the Optuna objective.</li></ol></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 4 Takeaway</span><p>Random Search beats Grid Search in time-per-quality almost always. Use Optuna when each training run is expensive — it is the same logic as running only your highest-ROI campaigns once you have learned which levers matter.</p></div>
+</section>
+
+<!-- ══ W5 ══ -->
+<section class="chapter" id="s4">
+  <div class="ch-eyebrow">Week 5 · Pipelines &amp; Feature Engineering</div>
+  <h2 class="ch-title">Garbage In, <em>Garbage Out</em></h2>
+  <p>Feature engineering is where marketing domain knowledge pays off most. A Pipeline bundles data preparation with your model so that <strong>the same transformations applied during training are automatically applied to new data at prediction time</strong>.</p>
+  <div class="concept-box"><p><strong>RFM — the original marketing ML feature:</strong> Recency, Frequency, Monetary — three dimensions that have predicted customer value since the 1980s. This week you build them from scratch from raw transaction logs.</p></div>
+  <button class="lab-btn" onclick="toggleLab('l4',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l4">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 5.1</span> Data Leakage Without Pipeline vs. The Correct Way</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Leakage demo</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+<span class="kw">from</span> sklearn.pipeline <span class="kw">import</span> Pipeline
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+np.random.<span class="fn">seed</span>(<span class="nm">42</span>)
+X = np.random.<span class="fn">randn</span>(<span class="nm">1000</span>, <span class="nm">20</span>)   <span class="cm"># 20 pure noise features</span>
+y = np.random.<span class="fn">randint</span>(<span class="nm">0</span>, <span class="nm">2</span>, <span class="nm">1000</span>) <span class="cm"># random labels → model should score ~50%</span>
+
+<span class="cm"># ❌ WRONG: scale ALL data before splitting</span>
+X_sc = <span class="fn">StandardScaler</span>().<span class="fn">fit_transform</span>(X)   <span class="cm"># leaks train stats into test!</span>
+X_tr,X_te,y_tr,y_te = train_test_split(X_sc, y, test_size=<span class="nm">.2</span>)
+bad = <span class="fn">LogisticRegression</span>().<span class="fn">fit</span>(X_tr, y_tr)
+<span class="bi">print</span>(<span class="st">f"Leaky score:   {bad.score(X_te, y_te):.3f}"</span>)
+
+<span class="cm"># ✅ RIGHT: scaler inside Pipeline — refitted per fold</span>
+pipe = <span class="fn">Pipeline</span>([(<span class="st">"sc"</span>,<span class="fn">StandardScaler</span>()), (<span class="st">"clf"</span>,<span class="fn">LogisticRegression</span>())])
+cv = <span class="fn">cross_val_score</span>(pipe, X, y, cv=<span class="nm">5</span>)
+<span class="bi">print</span>(<span class="st">f"Pipeline CV:   {cv.mean():.3f} ± {cv.std():.3f}"</span>)  <span class="cm"># ~0.50 — honest</span></code></pre>
+    </div>
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 5.2</span> ColumnTransformer — Mixed Data Types</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · ColumnTransformer</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">from</span> sklearn.compose <span class="kw">import</span> ColumnTransformer
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler, OneHotEncoder
+<span class="kw">from</span> sklearn.impute <span class="kw">import</span> SimpleImputer
+<span class="kw">from</span> sklearn.pipeline <span class="kw">import</span> Pipeline
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+
+df_m = pd.<span class="fn">DataFrame</span>({
+    <span class="st">"age"</span>:    [<span class="nm">25</span>,<span class="nm">34</span>,<span class="kw">None</span>,<span class="nm">45</span>,<span class="nm">28</span>],
+    <span class="st">"spend"</span>:  [<span class="nm">200</span>,<span class="nm">450</span>,<span class="nm">120</span>,<span class="kw">None</span>,<span class="nm">310</span>],
+    <span class="st">"channel"</span>:[<span class="st">"email"</span>,<span class="st">"social"</span>,<span class="st">"email"</span>,<span class="st">"direct"</span>,<span class="st">"social"</span>],
+    <span class="st">"churned"</span>:[<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">1</span>],
+})
+num = <span class="fn">Pipeline</span>([(<span class="st">"imp"</span>,<span class="fn">SimpleImputer</span>(strategy=<span class="st">"median"</span>)),(<span class="st">"sc"</span>,<span class="fn">StandardScaler</span>())])
+cat = <span class="fn">Pipeline</span>([(<span class="st">"imp"</span>,<span class="fn">SimpleImputer</span>(strategy=<span class="st">"most_frequent"</span>)),(<span class="st">"ohe"</span>,<span class="fn">OneHotEncoder</span>(handle_unknown=<span class="st">"ignore"</span>))])
+
+prep = <span class="fn">ColumnTransformer</span>([(<span class="st">"num"</span>,num,[<span class="st">"age"</span>,<span class="st">"spend"</span>]),(<span class="st">"cat"</span>,cat,[<span class="st">"channel"</span>])])
+full = <span class="fn">Pipeline</span>([(<span class="st">"prep"</span>,prep),(<span class="st">"clf"</span>,<span class="fn">RandomForestClassifier</span>())])
+<span class="bi">print</span>(full)</code></pre>
+    </div>
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 5.3</span> Building RFM Features from Transaction Logs</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · RFM Feature Engineering</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">import</span> pandas <span class="kw">as</span> pd; <span class="kw">import</span> numpy <span class="kw">as</span> np
+np.random.<span class="fn">seed</span>(<span class="nm">7</span>); n_tx = <span class="nm">2000</span>
+
+tx = pd.<span class="fn">DataFrame</span>({
+    <span class="st">"customer_id"</span>: np.random.<span class="fn">randint</span>(<span class="nm">1</span>,<span class="nm">401</span>,n_tx),
+    <span class="st">"date"</span>: pd.<span class="fn">to_datetime</span>(<span class="st">"2025-01-01"</span>) + pd.<span class="fn">to_timedelta</span>(np.random.<span class="fn">randint</span>(<span class="nm">0</span>,<span class="nm">365</span>,n_tx),unit=<span class="st">"D"</span>),
+    <span class="st">"amount"</span>: np.random.<span class="fn">exponential</span>(<span class="nm">80</span>, n_tx).<span class="fn">round</span>(<span class="nm">2</span>),
+})
+
+snap = tx[<span class="st">"date"</span>].<span class="fn">max</span>() + pd.<span class="fn">Timedelta</span>(days=<span class="nm">1</span>)
+rfm = tx.<span class="fn">groupby</span>(<span class="st">"customer_id"</span>).<span class="fn">agg</span>(
+    Recency   = (<span class="st">"date"</span>,   <span class="kw">lambda</span> d: (snap-d.<span class="fn">max</span>()).days),
+    Frequency = (<span class="st">"date"</span>,   <span class="st">"count"</span>),
+    Monetary  = (<span class="st">"amount"</span>, <span class="st">"sum"</span>),
+).<span class="fn">reset_index</span>()
+
+<span class="kw">for</span> c <span class="kw">in</span> [<span class="st">"Frequency"</span>,<span class="st">"Monetary"</span>]:
+    rfm[<span class="st">f"{c}_score"</span>] = pd.<span class="fn">qcut</span>(rfm[c], q=<span class="nm">5</span>, labels=[<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>,<span class="nm">4</span>,<span class="nm">5</span>])
+rfm[<span class="st">"Recency_score"</span>] = pd.<span class="fn">qcut</span>(rfm[<span class="st">"Recency"</span>], q=<span class="nm">5</span>, labels=[<span class="nm">5</span>,<span class="nm">4</span>,<span class="nm">3</span>,<span class="nm">2</span>,<span class="nm">1</span>])
+rfm[<span class="st">"RFM"</span>] = rfm[<span class="st">"Recency_score"</span>].<span class="fn">astype</span>(<span class="bi">int</span>)+rfm[<span class="st">"Frequency_score"</span>].<span class="fn">astype</span>(<span class="bi">int</span>)+rfm[<span class="st">"Monetary_score"</span>].<span class="fn">astype</span>(<span class="bi">int</span>)
+<span class="bi">print</span>(rfm.<span class="fn">head</span>())</code></pre>
+    </div>
+    <div class="try-it"><h4>Try it yourself</h4><ol><li>Add <code class="ic">avg_order_value = Monetary / Frequency</code>. Does it improve churn prediction?</li><li>Segment by RFM: Champions (≥13), At Risk (7–9), Lost (&lt;7). How many customers in each?</li><li>Add tenure (days since first purchase) as a 4th feature. Does it predict churn?</li></ol></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 5 Takeaway</span><p>A Pipeline encoding RFM features, segment flags, and seasonality almost always outperforms a raw-feature model. Feature engineering is where your marketing expertise creates an unfair advantage over pure-data approaches.</p></div>
+</section>
+
+<!-- ══ W6 ══ -->
+<section class="chapter" id="s5">
+  <div class="ch-eyebrow">Week 6 · Tree Models &amp; Ensemble</div>
+  <h2 class="ch-title">From One Tree to <em>a Forest</em></h2>
+  <p>A single decision tree is interpretable but unstable. Ensemble methods combine many trees. <strong>Bagging</strong> (Random Forest) builds trees in parallel on random subsets. <strong>Boosting</strong> (XGBoost, LightGBM) builds trees sequentially, each correcting the previous one's mistakes.</p>
+  <div class="concept-box"><p><strong>The marketing analogy:</strong> A single sales forecast from one analyst can be badly wrong. Average forecasts from 500 independently-briefed analysts (Random Forest) and you get something far more reliable. Boosting is like running the analysis, then asking a second analyst to focus only on the cases the first got wrong.</p></div>
+  <button class="lab-btn" onclick="toggleLab('l5',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l5">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 6.1</span> Decision Tree — Interpretable but Fragile</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Decision Tree</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">from</span> sklearn.tree <span class="kw">import</span> DecisionTreeClassifier, plot_tree
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+dt = <span class="fn">DecisionTreeClassifier</span>(max_depth=<span class="nm">4</span>, random_state=<span class="nm">42</span>).<span class="fn">fit</span>(X_tr, y_tr)
+<span class="bi">print</span>(<span class="st">f"Train: {dt.score(X_tr,y_tr):.3f}  Test: {dt.score(X_te,y_te):.3f}"</span>)
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="nm">18</span>,<span class="nm">6</span>))
+<span class="fn">plot_tree</span>(dt, max_depth=<span class="nm">3</span>, filled=<span class="kw">True</span>, feature_names=[<span class="st">f"f{i}"</span> <span class="kw">for</span> i <span class="kw">in</span> <span class="bi">range</span>(X_tr.shape[<span class="nm">1</span>])], ax=ax)
+plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()
+
+dt_overfit = <span class="fn">DecisionTreeClassifier</span>(random_state=<span class="nm">42</span>).<span class="fn">fit</span>(X_tr, y_tr)  <span class="cm"># no depth limit</span>
+<span class="bi">print</span>(<span class="st">f"Overfit — Train: {dt_overfit.score(X_tr,y_tr):.3f}  Test: {dt_overfit.score(X_te,y_te):.3f}"</span>)</code></pre>
+    </div>
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 6.2</span> RF vs XGBoost vs LightGBM Head-to-Head</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Ensemble comparison</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code>!pip install xgboost lightgbm --quiet
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+<span class="kw">from</span> xgboost <span class="kw">import</span> XGBClassifier
+<span class="kw">from</span> lightgbm <span class="kw">import</span> LGBMClassifier
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> roc_auc_score
+<span class="kw">import</span> time
+
+models = {
+    <span class="st">"Random Forest"</span>: <span class="fn">RandomForestClassifier</span>(n_estimators=<span class="nm">100</span>,random_state=<span class="nm">42</span>),
+    <span class="st">"XGBoost"</span>:       <span class="fn">XGBClassifier</span>(n_estimators=<span class="nm">100</span>,random_state=<span class="nm">42</span>,eval_metric=<span class="st">"auc"</span>,verbosity=<span class="nm">0</span>),
+    <span class="st">"LightGBM"</span>:      <span class="fn">LGBMClassifier</span>(n_estimators=<span class="nm">100</span>,random_state=<span class="nm">42</span>,verbose=-<span class="nm">1</span>),
+}
+<span class="kw">for</span> name, m <span class="kw">in</span> models.items():
+    t = time.<span class="fn">time</span>(); m.<span class="fn">fit</span>(X_tr, y_tr)
+    auc = <span class="fn">roc_auc_score</span>(y_te, m.<span class="fn">predict_proba</span>(X_te)[:,<span class="nm">1</span>])
+    <span class="bi">print</span>(<span class="st">f"{name:15s}  AUC={auc:.4f}  Time={time.time()-t:.2f}s"</span>)</code></pre>
+    </div>
+    <h4 class="step-head">Live Simulation — OOB Error vs. Number of Trees</h4>
+    <div class="sim-box">
+      <div class="sim-lbl">⚡ More trees = more stable — watch the error floor flatten out</div>
+      <div class="sim-row"><label>n_estimators</label><input type="range" min="10" max="500" value="50" step="10" id="oob-sl" oninput="drawOOB()"><span class="sim-val" id="oob-val">50</span></div>
+      <canvas id="oobCanvas" style="width:100%;height:135px;display:block;margin-top:.4rem"></canvas>
+    </div>
+    <div class="callout"><span class="callout-tag">When to use which</span><p><strong>Random Forest</strong>: great default, robust to hyperparameters. <strong>XGBoost</strong>: Kaggle workhorse, very accurate with tuning. <strong>LightGBM</strong>: fastest on large datasets. Start with LightGBM for datasets over 100k rows.</p></div>
+    <div class="try-it"><h4>Try it yourself</h4><ol><li>Print feature importances: <code class="ic">pd.Series(rf.feature_importances_).sort_values(ascending=False).head(10)</code></li><li>Try <code class="ic">XGBClassifier(scale_pos_weight=8)</code> for class imbalance. Does AUC improve?</li><li>Build a simple stack: use RF and XGB predictions as features for a Logistic Regression meta-model.</li></ol></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 6 Takeaway</span><p>LightGBM is your default starting point for tabular marketing data — fast, accurate, handles missing values natively. Reserve XGBoost for when you need maximum accuracy and have time to tune.</p></div>
+</section>
+
+<!-- ══ W7 ══ -->
+<section class="chapter" id="s6">
+  <div class="ch-eyebrow">Week 7 · AutoML</div>
+  <h2 class="ch-title">Let the Machine <em>Tune Itself</em></h2>
+  <p>AutoML automates model selection, feature engineering, and hyperparameter tuning. It does not replace you — it handles repetitive search work so you can focus on defining the right problem and interpreting results for business action.</p>
+  <div class="concept-box"><p><strong>The critical mindset:</strong> A model with 0.94 AUC on a poorly-framed problem will still fail in production. Your marketing domain expertise defines the question. AutoML searches the answer space.</p></div>
+  <button class="lab-btn" onclick="toggleLab('l6',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l6">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 7.1</span> FLAML — 3 Lines to a Trained Model</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · FLAML</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code>!pip install flaml --quiet
+<span class="kw">from</span> flaml <span class="kw">import</span> AutoML
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> roc_auc_score
+
+automl = <span class="fn">AutoML</span>()
+automl.<span class="fn">fit</span>(X_tr, y_tr, task=<span class="st">"classification"</span>, metric=<span class="st">"roc_auc"</span>, time_budget=<span class="nm">60</span>)
+<span class="bi">print</span>(<span class="st">f"Best model:  {automl.best_estimator}"</span>)
+<span class="bi">print</span>(<span class="st">f"Best config: {automl.best_config}"</span>)
+<span class="bi">print</span>(<span class="st">f"Test AUC:    {roc_auc_score(y_te, automl.predict_proba(X_te)[:,1]):.4f}"</span>)</code></pre>
+    </div>
+    <div class="callout tip"><span class="callout-tag">Free tier tip</span><p>FLAML works within Colab's free tier. Set <code class="ic">time_budget=60</code> for quick experiments and <code class="ic">time_budget=300</code> for production-quality results. No GPU needed for tabular marketing data.</p></div>
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 7.2</span> AutoGluon — Model Leaderboard</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · AutoGluon</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># ⚠ AutoGluon is large (~1GB). Recommended: use Kaggle Notebooks (free, 30GB RAM)</span>
+!pip install autogluon.tabular --quiet
+<span class="kw">from</span> autogluon.tabular <span class="kw">import</span> TabularPredictor
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+train_df = pd.<span class="fn">DataFrame</span>(X_tr); train_df[<span class="st">"target"</span>] = y_tr.values
+predictor = <span class="fn">TabularPredictor</span>(label=<span class="st">"target"</span>, eval_metric=<span class="st">"roc_auc"</span>)
+predictor.<span class="fn">fit</span>(train_df, time_limit=<span class="nm">120</span>, presets=<span class="st">"medium_quality"</span>)
+
+test_df = pd.<span class="fn">DataFrame</span>(X_te)
+lb = predictor.<span class="fn">leaderboard</span>(test_df.<span class="fn">assign</span>(target=y_te), silent=<span class="kw">True</span>)
+<span class="bi">print</span>(lb[[<span class="st">"model"</span>,<span class="st">"score_test"</span>,<span class="st">"fit_time"</span>]].<span class="fn">head</span>(<span class="nm">8</span>))</code></pre>
+    </div>
+    <div class="try-it"><h4>Try it yourself</h4><ol><li>Change FLAML's <code class="ic">metric</code> to <code class="ic">"f1"</code>. Does it select a different best model?</li><li>Compare FLAML AUC vs. your best manually-tuned model from Week 4.</li><li>Read <code class="ic">automl.best_config</code>. Can you see the hyperparameters AutoML discovered?</li></ol></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 7 Takeaway</span><p>AutoML beats a default sklearn model nearly every time, and gets you 90% of an expert's result in 5% of the time. For marketing pilots and quick proof-of-concepts, that is the right trade-off.</p></div>
+</section>
+
+<!-- ══ W8 ══ -->
+<section class="chapter" id="s7">
+  <div class="ch-eyebrow">Week 8 · Deployment</div>
+  <h2 class="ch-title">From Notebook to <em>Live App</em></h2>
+  <p>A model that lives only in a Colab notebook has zero business value. <strong>Gradio</strong> turns a Python function into a web app in minutes. <strong>Hugging Face Spaces</strong> hosts it for free with a shareable link — no servers, no DevOps.</p>
+  <div class="concept-box"><p><strong>The restaurant analogy:</strong> Training a model = developing the recipe. Deployment = opening the restaurant. The best recipe in the world has no revenue until customers can actually order the dish.</p></div>
+  <button class="lab-btn" onclick="toggleLab('l7',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l7">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 8.1</span> Local Gradio Demo in 10 Lines</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Gradio demo</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code>!pip install gradio --quiet
+<span class="kw">import</span> gradio <span class="kw">as</span> gr; <span class="kw">import</span> joblib; <span class="kw">import</span> numpy <span class="kw">as</span> np
+
+joblib.<span class="fn">dump</span>(automl, <span class="st">"churn_model.pkl"</span>)
+model = joblib.<span class="fn">load</span>(<span class="st">"churn_model.pkl"</span>)
+
+<span class="kw">def</span> <span class="fn">predict_churn</span>(recency, frequency, monetary, tenure):
+    prob = model.<span class="fn">predict_proba</span>(np.<span class="fn">array</span>([[recency,frequency,monetary,tenure]]))[<span class="nm">0</span>,<span class="nm">1</span>]
+    label = <span class="st">"🔴 High Risk"</span> <span class="kw">if</span> prob &gt; <span class="nm">.5</span> <span class="kw">else</span> <span class="st">"🟢 Low Risk"</span>
+    <span class="kw">return</span> {label: <span class="bi">float</span>(prob), <span class="st">"Stay"</span>: <span class="nm">1</span>-<span class="bi">float</span>(prob)}
+
+gr.<span class="fn">Interface</span>(
+    fn=predict_churn,
+    inputs=[gr.<span class="fn">Slider</span>(<span class="nm">0</span>,<span class="nm">365</span>,label=<span class="st">"Days Since Last Purchase"</span>),
+            gr.<span class="fn">Slider</span>(<span class="nm">1</span>,<span class="nm">50</span>,label=<span class="st">"Purchase Frequency"</span>),
+            gr.<span class="fn">Slider</span>(<span class="nm">0</span>,<span class="nm">5000</span>,label=<span class="st">"Total Spend (AED)"</span>),
+            gr.<span class="fn">Slider</span>(<span class="nm">0</span>,<span class="nm">1000</span>,label=<span class="st">"Account Age (days)"</span>)],
+    outputs=gr.<span class="fn">Label</span>(label=<span class="st">"Churn Probability"</span>),
+    title=<span class="st">"🎯 Customer Churn Predictor"</span>,
+).<span class="fn">launch</span>(share=<span class="kw">True</span>)</code></pre>
+    </div>
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 8.2</span> Full app.py for Hugging Face Spaces</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">app.py</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># Upload this + model.pkl + requirements.txt to your HF Space</span>
+<span class="kw">import</span> gradio <span class="kw">as</span> gr
+<span class="kw">import</span> joblib, pandas <span class="kw">as</span> pd, numpy <span class="kw">as</span> np
+
+model = joblib.<span class="fn">load</span>(<span class="st">"model.pkl"</span>)
+FEATURES = [<span class="st">"recency"</span>,<span class="st">"frequency"</span>,<span class="st">"monetary"</span>,<span class="st">"tenure_days"</span>]
+
+<span class="kw">def</span> <span class="fn">predict</span>(*args):
+    df = pd.<span class="fn">DataFrame</span>([<span class="bi">dict</span>(<span class="fn">zip</span>(FEATURES, args))])
+    prob = model.<span class="fn">predict_proba</span>(df)[<span class="nm">0</span>,<span class="nm">1</span>]
+    risk = <span class="st">"🔴 High"</span> <span class="kw">if</span> prob&gt;<span class="nm">.6</span> <span class="kw">else</span> (<span class="st">"🟡 Medium"</span> <span class="kw">if</span> prob&gt;<span class="nm">.3</span> <span class="kw">else</span> <span class="st">"🟢 Low"</span>)
+    <span class="kw">return</span> <span class="st">f"{risk} churn risk — {prob:.1%}"</span>
+
+gr.<span class="fn">Interface</span>(fn=predict,
+    inputs=[gr.<span class="fn">Number</span>(label=<span class="st">"Recency (days)"</span>), gr.<span class="fn">Number</span>(label=<span class="st">"Frequency"</span>),
+            gr.<span class="fn">Number</span>(label=<span class="st">"Monetary (AED)"</span>), gr.<span class="fn">Number</span>(label=<span class="st">"Tenure (days)"</span>)],
+    outputs=<span class="st">"text"</span>, title=<span class="st">"HCT ML in Marketing — Churn Predictor"</span>
+).<span class="fn">launch</span>()</code></pre>
+    </div>
+    <div class="callout tip"><span class="callout-tag">HF Spaces deployment steps</span><p>1. Create an account at huggingface.co → 2. New Space → Gradio SDK → 3. Upload app.py, model.pkl, requirements.txt → 4. HF builds and hosts your app automatically. Shareable URL: <strong>your-name-space-name.hf.space</strong></p></div>
+    <div class="try-it"><h4>Try it yourself</h4><ol><li>Add a CSV upload with <code class="ic">gr.File()</code> for bulk predictions.</li><li>Push your files to a GitHub repo and enable GitHub sync in HF Spaces settings.</li><li>Share your Space URL with a classmate. Can they get a prediction with zero coding?</li></ol></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 8 Takeaway</span><p>Handing a non-technical stakeholder a URL and saying "just upload your data here" converts ML from a data science project into a business tool — and that conversation is what justifies the investment.</p></div>
+</section>
+
+<!-- ══ W9 ══ -->
+<section class="chapter" id="s8">
+  <div class="ch-eyebrow">Week 9 · Full Project</div>
+  <h2 class="ch-title">Real Kaggle Dataset: <em>End-to-End</em></h2>
+  <p>This week you put everything together on a real-world marketing dataset. This is your <strong>course capstone</strong>: EDA → feature engineering → Pipeline → cross-validation → AutoML → deployed Gradio app.</p>
+  <div class="concept-box"><p><strong>Recommended datasets (all free on Kaggle):</strong> Telco Customer Churn · Bank Marketing Response · E-Commerce Shipping · Online Retail II. Pick the one closest to your intended industry.</p></div>
+  <button class="lab-btn" onclick="toggleLab('l8',this)"><span>⚗</span> View Python Implementation <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l8">
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 9.1</span> Full EDA Template</h3>
+    <a class="colab-btn" href="https://colab.research.google.com/" target="_blank">▶ Open in Colab</a>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · EDA</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="kw">import</span> pandas <span class="kw">as</span> pd; <span class="kw">import</span> seaborn <span class="kw">as</span> sns; <span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+df = pd.<span class="fn">read_csv</span>(<span class="st">"your_dataset.csv"</span>)
+<span class="bi">print</span>(<span class="st">"Shape:"</span>, df.<span class="fn">shape</span>)
+<span class="bi">print</span>((df.<span class="fn">isnull</span>().<span class="fn">mean</span>() * <span class="nm">100</span>).<span class="fn">round</span>(<span class="nm">1</span>).<span class="fn">sort_values</span>(ascending=<span class="kw">False</span>).<span class="fn">head</span>(<span class="nm">10</span>))
+<span class="bi">print</span>(df[<span class="st">"target"</span>].<span class="fn">value_counts</span>(normalize=<span class="kw">True</span>))
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="nm">10</span>,<span class="nm">7</span>))
+<span class="fn">sns.heatmap</span>(df.<span class="fn">select_dtypes</span>(<span class="st">"number"</span>).<span class="fn">corr</span>(), cmap=<span class="st">"coolwarm"</span>, center=<span class="nm">0</span>, ax=ax, annot=<span class="kw">True</span>, fmt=<span class="st">".1f"</span>)
+plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()</code></pre>
+    </div>
+    <h3 class="ex-head"><span class="ex-n">EXAMPLE 9.2</span> Pipeline + FLAML + SHAP Explainability</h3>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Python · Full workflow</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code>!pip install flaml shap --quiet
+<span class="kw">from</span> flaml <span class="kw">import</span> AutoML
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> StratifiedKFold, cross_val_score
+<span class="kw">import</span> shap
+
+automl = <span class="fn">AutoML</span>()
+automl.<span class="fn">fit</span>(X_tr, y_tr, task=<span class="st">"classification"</span>, metric=<span class="st">"roc_auc"</span>, time_budget=<span class="nm">120</span>)
+
+cv = <span class="fn">StratifiedKFold</span>(n_splits=<span class="nm">5</span>, shuffle=<span class="kw">True</span>, random_state=<span class="nm">42</span>)
+cv_auc = <span class="fn">cross_val_score</span>(automl.model.estimator, X, y, cv=cv, scoring=<span class="st">"roc_auc"</span>)
+<span class="bi">print</span>(<span class="st">f"CV AUC: {cv_auc.mean():.4f} ± {cv_auc.std():.4f}"</span>)
+
+explainer = shap.<span class="fn">TreeExplainer</span>(automl.model.estimator)
+shap_vals = explainer.<span class="fn">shap_values</span>(X_te)
+shap.<span class="fn">summary_plot</span>(shap_vals, X_te, plot_type=<span class="st">"bar"</span>)</code></pre>
+    </div>
+    <div class="callout"><span class="callout-tag">Deliverable checklist</span><p>① EDA notebook (≥5 visualisations) · ② ML pipeline with cross-validated AUC · ③ SHAP feature importance plot · ④ Live Gradio app on HF Spaces · ⑤ GitHub repo with README explaining the business problem</p></div>
+    <div class="code-wrap">
+      <div class="code-head"><span class="code-lbl">Recommended GitHub structure</span><button class="cp-btn" onclick="copyCode(this)">Copy</button></div>
+<pre><code>ml-marketing-project/
+├── data/           <span class="cm"># README with Kaggle link only</span>
+├── notebooks/
+│   ├── 01_eda.ipynb
+│   └── 02_modelling.ipynb
+├── app.py          <span class="cm"># Gradio app</span>
+├── model.pkl
+├── requirements.txt
+└── README.md       <span class="cm"># business problem + HF Spaces link</span></code></pre>
+    </div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Week 9 Takeaway</span><p>A complete project — EDA + model + CV evaluation + deployed app + GitHub repo — is the deliverable that goes in your portfolio. It shows you can work end-to-end, not just run individual cells.</p></div>
+</section>
+
+<!-- ══ APPENDIX ══ -->
+<section class="chapter" id="s9">
+  <div class="ch-eyebrow">Reference · Appendix A</div>
+  <h2 class="ch-title">Cheatsheet <em>&amp;</em> Debugging Guide</h2>
+  <button class="lab-btn" onclick="toggleLab('l9',this)"><span>⚗</span> View Full Reference <em class="chev">▾</em></button>
+  <div class="lab-wrap" id="l9">
+    <h3 class="sec-head">sklearn Quick Reference</h3>
+    <table class="ref-table">
+      <thead><tr><th>Operation</th><th>Code</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td>Split data</td><td><code class="ic">train_test_split(X,y,test_size=.2,stratify=y)</code></td><td>Always stratify for classification</td></tr>
+        <tr><td>Cross-validate</td><td><code class="ic">cross_val_score(pipe,X,y,cv=StratifiedKFold(5))</code></td><td>For reliable metric estimation</td></tr>
+        <tr><td>Build pipeline</td><td><code class="ic">Pipeline([("sc",Scaler()),("clf",Model())])</code></td><td>Any time you scale or encode</td></tr>
+        <tr><td>Handle missing</td><td><code class="ic">SimpleImputer(strategy="median")</code></td><td>Numeric columns with NaN</td></tr>
+        <tr><td>Encode categories</td><td><code class="ic">OneHotEncoder(handle_unknown="ignore")</code></td><td>Nominal categories (&lt;20 values)</td></tr>
+        <tr><td>Grid search</td><td><code class="ic">GridSearchCV(model,params,cv=5,n_jobs=-1)</code></td><td>&lt;200 total combinations</td></tr>
+        <tr><td>Random search</td><td><code class="ic">RandomizedSearchCV(...,n_iter=30)</code></td><td>Large parameter spaces</td></tr>
+        <tr><td>Save model</td><td><code class="ic">joblib.dump(model,"model.pkl")</code></td><td>Before deployment</td></tr>
+        <tr><td>Load model</td><td><code class="ic">model=joblib.load("model.pkl")</code></td><td>In app.py / at prediction time</td></tr>
+      </tbody>
+    </table>
+    <h3 class="sec-head">Common Errors &amp; Fixes</h3>
+    <table class="ref-table">
+      <thead><tr><th>Error</th><th>Cause</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ic">ValueError: could not convert string</code></td><td>Categorical column not encoded</td><td>Add <code class="ic">OneHotEncoder</code> in ColumnTransformer</td></tr>
+        <tr><td><code class="ic">KeyError: "column"</code></td><td>Typo or wrong dataset loaded</td><td>Check <code class="ic">df.columns.tolist()</code></td></tr>
+        <tr><td><code class="ic">DataConversionWarning</code></td><td>Mixed dtypes in array</td><td><code class="ic">df[col]=df[col].astype(float)</code></td></tr>
+        <tr><td><code class="ic">MemoryError</code></td><td>Dataset too large for free Colab</td><td><code class="ic">df=df.sample(50000)</code> or use Kaggle Notebooks</td></tr>
+        <tr><td><code class="ic">ModuleNotFoundError</code></td><td>Library not installed</td><td>Run <code class="ic">!pip install library_name</code></td></tr>
+        <tr><td>Train AUC=1.0, Test AUC=0.6</td><td>Overfitting</td><td>Reduce <code class="ic">max_depth</code>, add regularisation</td></tr>
+        <tr><td>AUC≈0.5 after AutoML</td><td>Data leakage or wrong label</td><td>Check if label-derived features are in X</td></tr>
+      </tbody>
+    </table>
+    <h3 class="sec-head">Free Tools &amp; Resources</h3>
+    <ul>
+      <li><strong>Compute:</strong> Google Colab (colab.research.google.com) · Kaggle Notebooks (kaggle.com/code) — both free, no installation</li>
+      <li><strong>Models &amp; Data:</strong> Hugging Face (huggingface.co) · Kaggle Datasets (kaggle.com/datasets)</li>
+      <li><strong>Deployment:</strong> Hugging Face Spaces (free Gradio SDK) · GitHub (free public repos)</li>
+      <li><strong>Free APIs:</strong> HF Inference API · Cohere Trial Key · Google AI Studio (aistudio.google.com)</li>
+      <li><strong>Docs:</strong> scikit-learn.org/stable · flaml.ai/docs · optuna.readthedocs.io · gradio.app/docs</li>
+    </ul>
+    <div class="callout tip"><span class="callout-tag">Learning tip</span><p>After reading each week's material, open a blank Colab notebook and retype one example from memory — looking back only when stuck. 30 minutes of effortful recall beats 3 hours of passive reading.</p></div>
+  </div>
+  <div class="takeaway"><span class="takeaway-tag">Final word</span><p>You have now seen the complete modern ML stack — from raw data to a live deployed application. The tools are free. The knowledge is in your hands. The only remaining variable is practice.</p></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <span class="footer-title">ML in Marketing Lab</span>
+      <span class="footer-sub"><a href="https://hct.ac.ae/en" target="_blank" style="color:var(--green2);text-decoration:none">Higher Colleges of Technology</a></span>
+      <p style="font-size:.82rem;color:var(--text3);margin-top:.65rem;line-height:1.7">10-Week Applied Course<br>Tools: Colab · HF · GitHub · Gradio · sklearn · AutoML</p>
+    </div>
+    <div class="footer-ack">
+      <h3>🙏 Acknowledgement</h3>
+      <p>This interactive learning lab is inspired by and adapted from the <strong>Gies iMBA Learning Lab</strong>, developed for the Gies College of Business at the University of Illinois Urbana-Champaign. The three-panel layout, collapsible Python lab sections, Canvas simulations, AI teaching assistant concept, and the "marketing first, then code" philosophy are innovations from that original work. This version is a respectful adaptation for the ML in Marketing curriculum at <a href="https://hct.ac.ae/en" target="_blank">Higher Colleges of Technology</a>. We acknowledge clearly that this is an adaptation — and we are grateful for the framework it provided.</p>
+    </div>
+    <div class="footer-tools">
+      <h3>Week Map</h3>
+      <p style="line-height:2">W1 Intro →<br>W2 sklearn →<br>W3 Eval + CV →<br>W4 Tuning →<br>W5 Pipelines →<br>W6 Trees →<br>W7 AutoML →<br>W8 Gradio →<br>W9 Kaggle</p>
+    </div>
+    <div class="footer-copy">© Higher Colleges of Technology · ML in Marketing · Adapted with credit from the Gies iMBA Learning Lab framework</div>
+  </div>
+</footer>
+
+</div><!-- /main -->
+
+<!-- ══ COPILOT ══ -->
+<aside id="copilot">
+  <button class="copilot-toggle" id="cp-toggle" onclick="toggleCopilot()" title="Toggle AI TA">◀</button>
+  <div class="copilot-inner">
+    <div class="cp-header">
+      <div class="cp-title">HCT <span>ML TA</span></div>
+      <div class="tone-row">
+        <button class="tone-btn active" id="tone-st" onclick="setTone('student')">Student</button>
+        <button class="tone-btn" id="tone-mg" onclick="setTone('manager')">Manager</button>
+      </div>
+    </div>
+    <div class="sparks-strip">
+      <div class="sparks-lbl">Tap a concept to get an explanation</div>
+      <div class="spark-chips">
+        <div class="spark-chip" onclick="fireSpark('Overfitting')">Overfitting</div>
+        <div class="spark-chip" onclick="fireSpark('Cross-Validation')">Cross-Val</div>
+        <div class="spark-chip" onclick="fireSpark('AUC-ROC')">AUC-ROC</div>
+        <div class="spark-chip" onclick="fireSpark('Feature Importance')">Feat. Import.</div>
+        <div class="spark-chip" onclick="fireSpark('Gradient Boosting')">Boosting</div>
+        <div class="spark-chip" onclick="fireSpark('Data Leakage')">Data Leakage</div>
+        <div class="spark-chip" onclick="fireSpark('Precision vs Recall')">Prec. vs Recall</div>
+        <div class="spark-chip" onclick="fireSpark('AutoML')">AutoML</div>
+        <div class="spark-chip" onclick="fireSpark('Pipeline')">Pipeline</div>
+        <div class="spark-chip" onclick="fireSpark('Gradio')">Gradio</div>
+      </div>
+    </div>
+    <div class="cp-msgs" id="cp-msgs">
+      <div class="msg ta"><strong class="ta-label">HCT ML TA</strong>Hi! I'm your ML in Marketing assistant. Tap any concept chip above, paste code for a quick audit, or ask me anything about the course.</div>
+    </div>
+    <div class="cp-footer">
+      <button class="audit-btn" onclick="toggleAudit()">⊕ Paste Code — Audit My Python</button>
+      <textarea class="audit-area" id="audit-area" placeholder="Paste your Python code or error traceback here..."></textarea>
+      <button class="audit-submit" id="audit-submit" onclick="auditCode()">Audit My Code →</button>
+      <div class="send-row">
+        <input class="chat-input" id="chat-input" placeholder="Ask the ML TA…" onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="send-btn" onclick="sendChat()">→</button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+var TOTAL=10,unlocked=new Set(),tone='student',cpOpen=true;
+try{var sv=sessionStorage.getItem('hct_ml');if(sv){JSON.parse(sv).forEach(function(x){unlocked.add(x);});}}catch(e){}
+function saveU(){try{sessionStorage.setItem('hct_ml',JSON.stringify(Array.from(unlocked)));}catch(e){}}
+function updateProgress(){
+  var pct=Math.round(unlocked.size/TOTAL*100);
+  var f=document.getElementById('prog-fill'),p=document.getElementById('prog-pct');
+  if(f)f.style.width=pct+'%';if(p)p.textContent=pct+'%';
+  unlocked.forEach(function(id){
+    var d=document.getElementById('nd-'+id);if(d){d.textContent='●';d.style.color='#059669';}
+    var b=document.querySelector('[data-sec="'+id+'"]');if(b)b.classList.add('done');
+  });
+}
+function navTo(id){
+  document.querySelectorAll('.nav-item').forEach(function(b){b.classList.remove('active');});
+  var btn=document.querySelector('[data-sec="'+id+'"]');if(btn)btn.classList.add('active');
+  var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function toggleLab(id,btn){
+  var w=document.getElementById(id);if(!w)return;
+  var o=w.classList.toggle('open');btn.classList.toggle('open',o);
+  if(o){var n=id.replace('l','');unlocked.add('s'+n);saveU();updateProgress();}
+}
+function copyCode(btn){
+  var w=btn.closest('.code-wrap');if(!w)return;
+  var c=w.querySelector('pre code');if(!c)return;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(c.innerText).then(function(){btn.textContent='Copied!';btn.classList.add('ok');setTimeout(function(){btn.textContent='Copy';btn.classList.remove('ok');},1500);});
+  }
+}
+function toggleCopilot(){
+  cpOpen=!cpOpen;
+  var cp=document.getElementById('copilot'),tog=document.getElementById('cp-toggle');
+  if(cpOpen){cp.classList.remove('collapsed');tog.textContent='◀';}
+  else{cp.classList.add('collapsed');tog.textContent='▶';}
+}
+function setTone(t){
+  tone=t;
+  document.getElementById('tone-st').classList.toggle('active',t==='student');
+  document.getElementById('tone-mg').classList.toggle('active',t==='manager');
+  addMsg('ta','Switched to <strong>'+(t==='student'?'Student Mode — analogies and encouragement':'Manager Mode — ROI and deployment focus')+'</strong>.');
+}
+function addMsg(role,html){
+  var m=document.getElementById('cp-msgs');if(!m)return;
+  var d=document.createElement('div');d.className='msg '+role;
+  if(role==='ta')d.innerHTML='<strong class="ta-label">HCT ML TA</strong>'+html;
+  else d.textContent=html;
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+function showTyping(){
+  var m=document.getElementById('cp-msgs');if(!m)return;
+  var d=document.createElement('div');d.className='msg ta typing';d.id='typing-dot';
+  d.innerHTML='<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+function removeTyping(){var e=document.getElementById('typing-dot');if(e)e.remove();}
+
+var SPARKS={
+  student:{
+    'Overfitting':'Think of a student who memorises every past exam answer word-for-word but cannot answer a new question. The model "memorised" training data instead of learning the underlying pattern. Fix it with cross-validation, simpler models, or more data.',
+    'Cross-Validation':'Instead of testing your loyalty email in one customer segment, you test it in 5 different segments and average the results — that is 5-Fold CV. Use <code>cross_val_score(model, X, y, cv=5)</code>. The ± std tells you how reliable the result is.',
+    'AUC-ROC':'Randomly pick one subscriber and one non-subscriber. AUC = the probability your model ranks the subscriber higher. AUC 0.9 means it gets that right 90% of the time. Random guessing = 0.5.',
+    'Feature Importance':'Which customer signals drive the prediction most? In sklearn: <code>model.feature_importances_</code>. In SHAP: <code>shap.summary_plot(...)</code>. Use this to tell leadership WHAT is driving churn.',
+    'Gradient Boosting':'Build a weak model → find which customers it got wrong → build a second model focused on those errors → repeat 100 times. Each tree is a specialist fixing the previous team\'s mistakes. XGBoost and LightGBM work this way.',
+    'Data Leakage':'Predicting next quarter\'s sales using data that only exists after the quarter ends. Brilliant in testing, crashes in production. Fix: always put preprocessing inside a <code>Pipeline</code>, never use future information as a feature.',
+    'Precision vs Recall':'Precision = of customers I flagged "will churn," how many truly did? Recall = of all true churners, how many did I catch? In marketing, missing a high-value churner usually costs more than a false alarm.',
+    'AutoML':'An automated system that tries hundreds of model + parameter combinations for you. Start with FLAML (<code>time_budget=60</code>) — it runs free on Colab. Your job: frame the right problem and interpret results.',
+    'Pipeline':'Chains preprocessing + model into one object. Critical benefit: during CV, the scaler is refitted only on training folds each time — no data leakage. Always use <code>Pipeline([("sc",Scaler()),("clf",Model())])</code>.',
+    'Gradio':'Turns a Python function into a web app in ~5 lines. <code>gr.Interface(fn=predict, inputs=[...], outputs="text").launch(share=True)</code> gives a public URL you can share with anyone — no coding required on their end.',
+  },
+  manager:{
+    'Overfitting':'A model that looks excellent on last year\'s data but fails on this year\'s campaigns. It learned historical noise, not the underlying signal. Business consequence: budget allocated on false confidence. Cross-validation catches this before deployment.',
+    'Cross-Validation':'The ML equivalent of testing a campaign strategy in 5 markets before national rollout. The averaged result is your actual expected performance. Report "CV AUC = X ± Y" — the ± is your confidence interval.',
+    'AUC-ROC':'A single number (0–1) measuring how well your model ranks high-value customers above low-value ones. AUC 0.85 = 85% of the time it correctly identifies the better prospect. Below 0.65 = reconsider the features. Above 0.80 = commercially useful.',
+    'Feature Importance':'Answers "what is actually driving churn?" If tenure is top, invest in onboarding. If support tickets dominate, fix the product. Feature importance converts a black-box model into an actionable business diagnostic.',
+    'Gradient Boosting':'Industry standard for tabular business data. Expect 3–8% better AUC than Random Forest on most marketing datasets. Trade-off: harder to explain — use SHAP to recover interpretability for leadership presentations.',
+    'Data Leakage':'A model trained with leaky features shows AUC 0.99 in testing and 0.55 in production. Red flag: a variable that is suspiciously correlated with the label for non-obvious reasons, or features recorded after the event you are predicting.',
+    'Precision vs Recall':'Budget question: is it more expensive to miss a churner (lost CLV) or to flag a loyal customer incorrectly (wasted retention spend)? The ratio of these costs determines your optimal classification threshold.',
+    'AutoML':'Reduces model development time 70–80% for tabular marketing problems. ROI case: one analyst-day of AutoML vs. two weeks of manual search. Risk: validate on a holdout from a different time period before production deployment.',
+    'Pipeline':'Prevents the most common production failure: model trained on scaled data, deployed on unscaled data. Serialise with <code>joblib.dump(pipeline, "model.pkl")</code> — same transformations applied identically in production.',
+    'Gradio':'A non-technical stakeholder uploads their customer list and gets churn predictions in 30 seconds, no data engineering involved. Hosting on HF Spaces: free, zero DevOps, shareable in 30 minutes. This is the demo that secures budget.',
+  }
+};
+var GENERIC={
+  student:['Can you paste the specific code or error? I can turn any Python traceback into a plain-English fix.','The pattern for most weeks is: load data → build pipeline → cross-validate → interpret. What step are you on?','Try <code>print(df.shape)</code> after each step. Most silent bugs come from a step that unexpectedly dropped rows.'],
+  manager:['From a business lens: which decision is this model meant to inform? Knowing that helps determine whether AUC or Recall matters more.','The executive summary: every technique in this course converts customer behaviour data into a budget recommendation. What decision are you targeting?','Always present results as "CV AUC = X ± Y" not a single number. The ± tells leadership how much to trust the estimate.']
+};
+function fireSpark(term){
+  if(!cpOpen){cpOpen=true;document.getElementById('copilot').classList.remove('collapsed');document.getElementById('cp-toggle').textContent='◀';}
+  addMsg('user','Explain "'+term+'"');showTyping();
+  setTimeout(function(){removeTyping();var r=(SPARKS[tone]||SPARKS.student)[term]||'Ask me a specific question about <strong>'+term+'</strong> in a marketing context.';addMsg('ta',r);},750);
+}
+function sendChat(){
+  var inp=document.getElementById('chat-input');if(!inp)return;
+  var txt=inp.value.trim();if(!txt)return;
+  addMsg('user',txt);inp.value='';showTyping();
+  var resp=null;var tl=txt.toLowerCase();
+  Object.keys(SPARKS.student).forEach(function(k){if(!resp&&tl.indexOf(k.toLowerCase().substring(0,6))!==-1)resp=(SPARKS[tone]||SPARKS.student)[k];});
+  if(!resp){var pool=GENERIC[tone]||GENERIC.student;resp=pool[Math.floor(Math.random()*pool.length)];}
+  setTimeout(function(){removeTyping();addMsg('ta',resp);},800);
+}
+function toggleAudit(){
+  var a=document.getElementById('audit-area'),s=document.getElementById('audit-submit');
+  if(!a||!s)return;var o=a.classList.toggle('open');s.classList.toggle('open',o);
+}
+function auditCode(){
+  var code=document.getElementById('audit-area');if(!code)return;
+  var txt=code.value.trim();if(!txt){addMsg('ta','Please paste your code or traceback first.');return;}
+  addMsg('user','[Code submitted for audit]');showTyping();
+  setTimeout(function(){
+    removeTyping();var r='';
+    if(txt.indexOf('KeyError')!==-1)r='<strong>KeyError</strong> → Column or key not found. Run <code>df.columns.tolist()</code> to see exact names. Common issue: trailing space in CSV header like <code>"churn "</code> vs <code>"churn"</code>.';
+    else if(txt.indexOf('ValueError')!==-1&&txt.indexOf('string')!==-1)r='<strong>ValueError (string)</strong> → A column contains text but the model expects numbers. Add <code>OneHotEncoder</code> for categorical columns inside a <code>ColumnTransformer</code>.';
+    else if(txt.indexOf('MemoryError')!==-1)r='<strong>MemoryError</strong> → Dataset too large for free Colab. Try <code>df = df.sample(50000, random_state=42)</code> or switch to a Kaggle Notebook (30GB RAM, free).';
+    else if(txt.indexOf('ModuleNotFoundError')!==-1||txt.indexOf('ImportError')!==-1)r='<strong>ModuleNotFoundError</strong> → Library not installed. Run <code>!pip install library_name</code> in a Colab cell.';
+    else if(txt.indexOf('cross_val')!==-1||txt.indexOf('pipeline')!==-1)r='Your cross-validation + pipeline code looks structurally right. Key check: is your <code>Pipeline</code> passed to <code>cross_val_score</code> — not the raw model? That prevents data leakage during CV.';
+    else r='Paste the full error text (the red output in Colab) along with the cell that caused it. I will pinpoint the exact line.';
+    addMsg('ta',r);
+  },1000);
+}
+
+/* ── CANVAS SIMULATIONS ── */
+function drawSplit(){
+  var sl=document.getElementById('split-sl'),vl=document.getElementById('split-val'),c=document.getElementById('splitCanvas');
+  if(!sl||!c)return;
+  var ts=parseInt(sl.value,10);if(vl)vl.textContent=ts+'%';
+  var dpr=window.devicePixelRatio||1,W=c.offsetWidth||400,H=85;
+  c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
+  var ctx=c.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+  var n=1000,nTest=Math.round(n*ts/100),nTrain=n-nTest;
+  var tw=(nTrain/n)*(W-20),tw2=(nTest/n)*(W-20);
+  var g=ctx.createLinearGradient(10,0,10+tw,0);
+  g.addColorStop(0,'#6D28D9');g.addColorStop(1,'#7C3AED');
+  ctx.fillStyle=g;ctx.beginPath();ctx.roundRect(10,22,tw,32,5);ctx.fill();
+  var g2=ctx.createLinearGradient(10+tw+4,0,10+tw+4+tw2,0);
+  g2.addColorStop(0,'#059669');g2.addColorStop(1,'#10B981');
+  ctx.fillStyle=g2;ctx.beginPath();ctx.roundRect(10+tw+4,22,tw2,32,5);ctx.fill();
+  ctx.font='600 12px Inter,sans-serif';ctx.textAlign='center';
+  if(tw>80){ctx.fillStyle='#fff';ctx.fillText('Training: '+nTrain+' samples',10+tw/2,43);}
+  if(tw2>60){ctx.fillStyle='#fff';ctx.fillText('Test: '+nTest,10+tw+4+tw2/2,43);}
+  ctx.font='500 11px Inter';ctx.textAlign='center';
+  ctx.fillStyle='#6B7280';ctx.fillText((100-ts)+'% train',10+tw/2,70);ctx.fillText(ts+'% test',10+tw+4+tw2/2,70);
+}
+
+function drawKFold(){
+  var sl=document.getElementById('kfold-sl'),vl=document.getElementById('kfold-val'),c=document.getElementById('cvCanvas');
+  if(!sl||!c)return;
+  var K=parseInt(sl.value,10);if(vl)vl.textContent=K;
+  var dpr=window.devicePixelRatio||1,W=c.offsetWidth||400,H=135;
+  c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
+  var ctx=c.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+  var pl=52,pr=12,pt=8,cellH=Math.floor((H-pt-20)/K)-2,cellW=Math.floor((W-pl-pr)/K);
+  ctx.font='600 11px Inter,sans-serif';
+  for(var fold=0;fold<K;fold++){
+    ctx.fillStyle='#6B7280';
+    ctx.fillText('Fold '+(fold+1),2,pt+fold*(cellH+2)+cellH/2+5);
+    for(var col=0;col<K;col++){
+      var x=pl+col*(cellW+1),y=pt+fold*(cellH+2);
+      if(col===fold){
+        var g=ctx.createLinearGradient(x,y,x+cellW,y+cellH);
+        g.addColorStop(0,'#059669');g.addColorStop(1,'#34D399');
+        ctx.fillStyle=g;
+      } else {
+        ctx.fillStyle='#DDD6FE';
+      }
+      ctx.beginPath();ctx.roundRect(x,y,cellW,cellH,3);ctx.fill();
+    }
+  }
+  var ly=H-10;
+  ctx.fillStyle='#DDD6FE';ctx.fillRect(pl,ly,14,8);
+  ctx.fillStyle='#374151';ctx.font='11px Inter';ctx.fillText('Train',pl+17,ly+8);
+  ctx.fillStyle='#34D399';ctx.fillRect(pl+65,ly,14,8);
+  ctx.fillText('Test fold',pl+82,ly+8);
+}
+
+function drawHPGrid(){
+  var sl=document.getElementById('hp-sl'),vl=document.getElementById('hp-val'),c=document.getElementById('hpCanvas');
+  if(!sl||!c)return;
+  var depth=parseInt(sl.value,10);if(vl)vl.textContent=depth;
+  var dpr=window.devicePixelRatio||1,W=c.offsetWidth||400,H=150;
+  c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
+  var ctx=c.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+  var trees=[50,100,150,200,250,300],depths=[2,4,6,8,10,12,15],pl=38,pr=10,pt=8,pb=24;
+  var cW=(W-pl-pr)/trees.length,cH=(H-pt-pb)/depths.length;
+  function simAUC(t,d){var peak=0.88;var td=Math.abs(d-8)/8,tt=Math.abs(t-150)/150;return Math.max(0.70,peak-0.08*td-0.05*tt);}
+  ctx.font='600 10px Inter';ctx.fillStyle='#6B7280';
+  depths.forEach(function(d,di){ctx.fillText(d,2,pt+di*cH+cH/2+4);});
+  trees.forEach(function(t,ti){ctx.fillText(t,pl+ti*cW+cW/2-8,H-4);});
+  depths.forEach(function(d,di){
+    trees.forEach(function(t,ti){
+      var auc=simAUC(t,d);
+      var hi=(d===depth);
+      var norm=(auc-0.70)/0.18;
+      var r=Math.round(255*(1-norm));
+      var g2=Math.round(100+155*norm);
+      var b=Math.round(255*(1-norm)*0.3);
+      ctx.fillStyle='rgba('+r+','+g2+','+b+','+(hi?.95:.65)+')';
+      ctx.fillRect(pl+ti*cW+1,pt+di*cH+1,cW-2,cH-2);
+      if(hi){ctx.strokeStyle='#6D28D9';ctx.lineWidth=2;ctx.strokeRect(pl+ti*cW+1,pt+di*cH+1,cW-2,cH-2);}
+      if(cH>14){ctx.fillStyle='#1E1B4B';ctx.font='600 9px JetBrains Mono';ctx.fillText(auc.toFixed(2),pl+ti*cW+3,pt+di*cH+cH/2+4);}
+    });
+  });
+}
+
+function drawOOB(){
+  var sl=document.getElementById('oob-sl'),vl=document.getElementById('oob-val'),c=document.getElementById('oobCanvas');
+  if(!sl||!c)return;
+  var n=parseInt(sl.value,10);if(vl)vl.textContent=n;
+  var dpr=window.devicePixelRatio||1,W=c.offsetWidth||400,H=135;
+  c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
+  var ctx=c.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+  var maxN=500,pl=44,pr=12,pt=10,pb=26;
+  var cW=W-pl-pr,cH=H-pt-pb;
+  function oobErr(k){return 0.08+0.22*Math.exp(-k/60);}
+  [0.10,0.20,0.30].forEach(function(v){
+    var y=pt+cH*(1-(v-0.08)/0.22);
+    ctx.strokeStyle='rgba(107,114,128,.2)';ctx.lineWidth=.8;
+    ctx.beginPath();ctx.moveTo(pl,y);ctx.lineTo(pl+cW,y);ctx.stroke();
+    ctx.fillStyle='#9CA3AF';ctx.font='10px JetBrains Mono';ctx.fillText(v.toFixed(2),2,y+4);
+  });
+  ctx.strokeStyle='#DDD6FE';ctx.lineWidth=1.2;ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  for(var k=1;k<=maxN;k++){
+    var x=pl+cW*(k-1)/(maxN-1),y=pt+cH*(1-(oobErr(k)-0.08)/0.22);
+    k===1?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.stroke();ctx.setLineDash([]);
+  var grad=ctx.createLinearGradient(pl,0,pl+cW*n/maxN,0);
+  grad.addColorStop(0,'#6D28D9');grad.addColorStop(1,'#059669');
+  ctx.strokeStyle=grad;ctx.lineWidth=2.5;
+  ctx.beginPath();
+  for(var k=1;k<=n;k++){
+    var x=pl+cW*(k-1)/(maxN-1),y=pt+cH*(1-(oobErr(k)-0.08)/0.22);
+    k===1?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  var cx=pl+cW*(n-1)/(maxN-1),cy=pt+cH*(1-(oobErr(n)-0.08)/0.22);
+  ctx.fillStyle='#6D28D9';ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#1E1B4B';ctx.font='600 10px Inter';ctx.fillText('Error='+oobErr(n).toFixed(3)+' n='+n,cx+8,cy-5);
+  ctx.fillStyle='#9CA3AF';ctx.font='10px JetBrains Mono';ctx.fillText('n_estimators →',pl,H-3);
+}
+
+function scrollSpy(){
+  var main=document.getElementById('main');if(!main)return;
+  var sections=document.querySelectorAll('.chapter');
+  var st=main.scrollTop,cur='';
+  sections.forEach(function(s){if(s.offsetTop-80<=st)cur=s.id;});
+  if(cur){
+    document.querySelectorAll('.nav-item').forEach(function(b){b.classList.remove('active');});
+    var btn=document.querySelector('[data-sec="'+cur+'"]');if(btn)btn.classList.add('active');
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  updateProgress();
+  var main=document.getElementById('main');if(main)main.addEventListener('scroll',scrollSpy);
+  setTimeout(function(){
+    drawSplit();
+    if(document.getElementById('cvCanvas').offsetWidth)drawKFold();
+    if(document.getElementById('hpCanvas').offsetWidth)drawHPGrid();
+    if(document.getElementById('oobCanvas').offsetWidth)drawOOB();
+  },300);
+});
+window.addEventListener('resize',function(){
+  setTimeout(function(){drawSplit();drawKFold();drawHPGrid();drawOOB();},100);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+---
+title: "Week 4: Model Evaluation"
+subtitle: "MKTS 301 — Machine Learning for Marketing"
+author: "University of Liverpool"
+date: today
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    code-fold: false
+    highlight-style: github
+execute:
+  echo: true
+  warning: false
+---
+
+## What does "good" mean?
+
+A model is only as good as the metric you choose.
+
+. . .
+
+**Wrong question:** "What is the accuracy?"
+
+**Right question:** "What happens if we're wrong, and in which direction?"
+
+---
+
+## The marketing metric that matters: Lift
+
+$$\text{Lift} = \frac{\text{Precision of model}}{\text{Base rate}}$$
+
+- Base rate = % of customers who churn (e.g. 20%)
+- Precision = % of *predicted churners* who actually churn
+
+. . .
+
+**Lift = 2.5** means: customers flagged by the model are **2.5× more likely** to churn
+than a randomly selected customer.
+
+---
+
+## Baseline first — always
+
+```{python}
+from sklearn.dummy import DummyClassifier
+from sklearn.metrics import roc_auc_score
+import numpy as np
+
+np.random.seed(42)
+y_test = np.random.binomial(1, 0.2, 500)  # 20% churn rate
+
+baseline = DummyClassifier(strategy='most_frequent')
+baseline.fit([[0]]*400, np.random.binomial(1, 0.2, 400))
+preds = baseline.predict_proba([[0]]*500)[:, 1]
+
+print(f"Baseline AUC: {roc_auc_score(y_test, preds):.3f}")
+print("Any model below this is worse than doing nothing.")
+```
+
+---
+
+## Cross-validation over train/test split
+
+Single train/test split introduces variance depending on which rows land where.
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import cross_val_score
+from sklearn.datasets import make_classification
+
+X, y = make_classification(n_samples=1000, n_features=10, random_state=42)
+model = LogisticRegression(random_state=42)
+
+scores = cross_val_score(model, X, y, cv=5, scoring='roc_auc')
+print(f"5-fold CV AUC: {scores.mean():.3f} ± {scores.std():.3f}")
+print("Report mean ± std — never just the mean.")
+```
+
+---
+
+## The ROC curve — what it tells marketers
+
+:::: {.columns}
+::: {.column width="60%"}
+- X-axis: % of non-churners you contact (wasted spend)
+- Y-axis: % of churners you catch (campaign coverage)
+- **AUC = area under this curve**
+- A perfect model: top-left corner
+:::
+::: {.column width="40%"}
+```{python}
+#| echo: false
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
+
+np.random.seed(42)
+X, y = make_classification(n_samples=500, n_features=5, random_state=42)
+from sklearn.model_selection import train_test_split
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, random_state=42)
+model.fit(X_tr, y_tr)
+fpr, tpr, _ = roc_curve(y_te, model.predict_proba(X_te)[:,1])
+
+fig, ax = plt.subplots(figsize=(4, 4))
+ax.plot(fpr, tpr, color='steelblue', lw=2, label=f'AUC={auc(fpr,tpr):.2f}')
+ax.plot([0,1],[0,1],'k--', label='Random')
+ax.set_xlabel('False Positive Rate'); ax.set_ylabel('True Positive Rate')
+ax.legend(fontsize=8); ax.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+:::
+::::
+
+---
+
+## Summary
+
+| Metric | When to use |
+|---|---|
+| AUC | Overall discriminative ability |
+| Precision | When false positives are costly |
+| Recall | When false negatives are costly |
+| Lift | Campaign targeting efficiency |
+| F1 | Balanced precision/recall trade-off |
+
+> **Always state which metric you optimised for, and why it fits the marketing problem.**

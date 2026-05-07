@@ -1,0 +1,39 @@
+name: Deploy Embedding Explorer to Hugging Face Spaces
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/embedding_explorer/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Push to Hugging Face Spaces
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          # Configure git identity
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+          # Clone the HF Space repo
+          git clone https://user:$HF_TOKEN@huggingface.co/spaces/YOUR_HF_USERNAME/embedding-explorer hf_space
+
+          # Sync app files
+          cp -r apps/embedding_explorer/. hf_space/
+          cp requirements.txt hf_space/requirements.txt
+
+          # Push
+          cd hf_space
+          git add .
+          git diff --cached --quiet || git commit -m "Deploy from GitHub: ${{ github.sha }}"
+          git push
