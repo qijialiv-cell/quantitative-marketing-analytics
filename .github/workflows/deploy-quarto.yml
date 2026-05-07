@@ -1,4 +1,4 @@
-name: Deploy Quarto Site to Cloudflare Pages
+name: Deploy quantitative-marketing-analytics to Cloudflare Pages
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
     paths:
       - 'quarto/**'
       - 'teaching/**/slides/**'
+      - 'apps/hct-ml-marketing-lab.html'
   workflow_dispatch:
 
 permissions:
@@ -35,6 +36,11 @@ jobs:
         run: |
           cd quarto/website
           quarto render
+
+      - name: Add static assets to site
+        run: |
+          mkdir -p quarto/website/_site/labs/hct-ml-lab
+          cp apps/hct-ml-marketing-lab.html quarto/website/_site/labs/hct-ml-lab/index.html
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
