@@ -1,4 +1,4 @@
-name: Deploy HCT Lab to Cloudflare Pages
+name: Deploy quantitative-marketing-analytics to Cloudflare Pages
 
 on:
   push:
