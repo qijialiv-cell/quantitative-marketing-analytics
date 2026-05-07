@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course Feedback — Teaching Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8F7FF;--bg2:#fff;--purple:#6D28D9;--purple2:#7C3AED;--purple3:rgba(109,40,217,.08);
+  --green:#059669;--amber:#D97706;--red:#DC2626;
+  --text:#1E1B4B;--text2:#374151;--text3:#6B7280;
+  --line:#E5E7EB;--radius:10px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.container{max-width:520px;width:100%;background:var(--bg2);border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 8px 30px rgba(109,40,217,.06);padding:2.5rem}
+h1{font-size:1.4rem;font-weight:700;margin-bottom:.3rem}
+.subtitle{color:var(--text3);font-size:.88rem;margin-bottom:1.8rem}
+label{display:block;font-weight:600;font-size:.85rem;margin-bottom:.4rem;color:var(--text2)}
+select,input,textarea{width:100%;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:var(--radius);font-family:inherit;font-size:.92rem;color:var(--text);background:var(--bg);transition:border-color .15s}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--purple)}
+textarea{resize:vertical;min-height:100px}
+.form-group{margin-bottom:1.3rem}
+.rating-group{display:flex;gap:.6rem}
+.rating-btn{flex:1;padding:.6rem;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);cursor:pointer;font-weight:600;font-size:.9rem;text-align:center;transition:all .15s}
+.rating-btn:hover{border-color:var(--purple);background:var(--purple3)}
+.rating-btn.selected{border-color:var(--purple);background:var(--purple);color:#fff}
+.rating-btn.selected:hover{background:var(--purple2)}
+.tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:2px solid var(--line)}
+.tab{padding:.6rem 1.2rem;font-weight:600;font-size:.88rem;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text3);transition:all .15s;background:none;border-top:none;border-right:none;border-left:none;font-family:inherit}
+.tab:hover{color:var(--purple)}
+.tab.active{color:var(--purple);border-bottom-color:var(--purple)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+button[type=submit]{width:100%;padding:.85rem;background:var(--purple);color:#fff;border:none;border-radius:var(--radius);font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s}
+button[type=submit]:hover{background:var(--purple2)}
+button[type=submit]:disabled{opacity:.5;cursor:not-allowed}
+.success-msg{text-align:center;padding:2rem 0;display:none}
+.success-msg .icon{font-size:3rem;margin-bottom:.8rem}
+.success-msg h2{font-size:1.2rem;margin-bottom:.4rem}
+.success-msg p{color:var(--text3);font-size:.88rem}
+.anon-note{background:var(--purple3);border-radius:var(--radius);padding:.7rem .9rem;font-size:.78rem;color:var(--purple);margin-bottom:1.5rem;line-height:1.5}
+.anon-note strong{color:var(--purple2)}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Course Feedback</h1>
+  <p class="subtitle">Help improve this course — your feedback is anonymous.</p>
+
+  <div class="anon-note">
+    <strong>Anonymous:</strong> No personal data is collected. Your feedback is used solely
+    to improve course content and teaching quality.
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="feedback">Feedback</button>
+    <button class="tab" data-tab="question">Ask a Question</button>
+    <button class="tab" data-tab="quiz">Quiz Response</button>
+  </div>
+
+  <!-- Feedback Tab -->
+  <form id="feedback-form" class="tab-content active">
+    <div class="form-group">
+      <label for="fb-course">Course</label>
+      <select id="fb-course" name="course" required>
+        <option value="">Select course...</option>
+        <option value="MKIB340">MKIB340 — Marketing & Digital Analytics</option>
+        <option value="MKIB256">MKIB256 — Market Research</option>
+        <option value="MKIB153">MKIB153 — Fundamentals of Marketing</option>
+        <option value="HCT-DMA">HCT — Digital Marketing, Analytics & AI+</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="fb-week">Week</label>
+      <input type="number" id="fb-week" name="week" min="1" max="20" required placeholder="e.g. 4">
+    </div>
+    <div class="form-group">
+      <label>Overall Rating</label>
+      <div class="rating-group">
+        <button type="button" class="rating-btn" data-value="1">1</button>
+        <button type="button" class="rating-btn" data-value="2">2</button>
+        <button type="button" class="rating-btn" data-value="3">3</button>
+        <button type="button" class="rating-btn" data-value="4">4</button>
+        <button type="button" class="rating-btn" data-value="5">5</button>
+      </div>
+      <input type="hidden" id="fb-rating" name="rating" required>
+    </div>
+    <div class="form-group">
+      <label for="fb-comment">Comments (optional)</label>
+      <textarea id="fb-comment" name="comment" placeholder="What went well? What could be improved?"></textarea>
+    </div>
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+  <!-- Question Tab -->
+  <form id="question-form" class="tab-content">
+    <div class="form-group">
+      <label for="q-course">Course</label>
+      <select id="q-course" name="course" required>
+        <option value="">Select course...</option>
+        <option value="MKIB340">MKIB340 — Marketing & Digital Analytics</option>
+        <option value="MKIB256">MKIB256 — Market Research</option>
+        <option value="MKIB153">MKIB153 — Fundamentals of Marketing</option>
+        <option value="HCT-DMA">HCT — Digital Marketing, Analytics & AI+</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="q-week">Week</label>
+      <input type="number" id="q-week" name="week" min="1" max="20" required placeholder="e.g. 4">
+    </div>
+    <div class="form-group">
+      <label for="q-text">Your Question</label>
+      <textarea id="q-text" name="question" required placeholder="What would you like to know?"></textarea>
+    </div>
+    <button type="submit">Submit Question</button>
+  </form>
+
+  <!-- Quiz Tab -->
+  <form id="quiz-form" class="tab-content">
+    <div class="form-group">
+      <label for="quiz-course">Course</label>
+      <select id="quiz-course" name="course" required>
+        <option value="">Select course...</option>
+        <option value="MKIB340">MKIB340 — Marketing & Digital Analytics</option>
+        <option value="MKIB256">MKIB256 — Market Research</option>
+        <option value="MKIB153">MKIB153 — Fundamentals of Marketing</option>
+        <option value="HCT-DMA">HCT — Digital Marketing, Analytics & AI+</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="quiz-week">Week</label>
+      <input type="number" id="quiz-week" name="week" min="1" max="20" required placeholder="e.g. 4">
+    </div>
+    <div class="form-group">
+      <label for="quiz-id">Student ID (anonymous)</label>
+      <input type="text" id="quiz-id" name="anonymous_id" required placeholder="e.g. S2026-0042">
+    </div>
+    <div class="form-group">
+      <label for="quiz-answers">Answers (JSON)</label>
+      <textarea id="quiz-answers" name="answers" required placeholder='{"q1": "a", "q2": "c", "q3": "b"}'></textarea>
+    </div>
+    <div class="form-group">
+      <label for="quiz-score">Score (%)</label>
+      <input type="number" id="quiz-score" name="score" min="0" max="100" step="0.1" placeholder="e.g. 85.5">
+    </div>
+    <button type="submit">Submit Quiz</button>
+  </form>
+
+  <!-- Success -->
+  <div class="success-msg" id="success-msg">
+    <div class="icon">&#10003;</div>
+    <h2>Thank you!</h2>
+    <p>Your response has been recorded.</p>
+  </div>
+</div>
+
+<script>
+const API_BASE = '';  // Set to your Render API URL in production, e.g. https://api.qijialiao.com
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab + '-form').classList.add('active');
+    document.getElementById('success-msg').style.display = 'none';
+  });
+});
+
+// Rating buttons
+document.querySelectorAll('.rating-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('fb-rating').value = btn.dataset.value;
+  });
+});
+
+// Show success and reset
+function showSuccess(formEl) {
+  document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+  document.querySelectorAll('.tabs').forEach(t => t.style.display = 'none');
+  const msg = document.getElementById('success-msg');
+  msg.style.display = 'block';
+  formEl.reset();
+  document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+  setTimeout(() => {
+    msg.style.display = 'none';
+    document.querySelectorAll('.tab-content').forEach(c => c.style.display = '');
+    document.querySelectorAll('.tabs').forEach(t => t.style.display = '');
+    document.getElementById('feedback-form').classList.add('active');
+    document.getElementById('question-form').classList.remove('active');
+    document.getElementById('quiz-form').classList.remove('active');
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-tab="feedback"]').classList.add('active');
+  }, 3000);
+}
+
+// Submit feedback
+document.getElementById('feedback-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {
+    course: document.getElementById('fb-course').value,
+    week: parseInt(document.getElementById('fb-week').value),
+    rating: parseInt(document.getElementById('fb-rating').value),
+    comment: document.getElementById('fb-comment').value || null,
+  };
+  try {
+    await fetch(API_BASE + '/feedback', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+    showSuccess(e.target);
+  } catch (err) {
+    alert('Submission failed. Please try again.');
+  }
+});
+
+// Submit question
+document.getElementById('question-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {
+    course: document.getElementById('q-course').value,
+    week: parseInt(document.getElementById('q-week').value),
+    question: document.getElementById('q-text').value,
+  };
+  try {
+    await fetch(API_BASE + '/questions', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+    showSuccess(e.target);
+  } catch (err) {
+    alert('Submission failed. Please try again.');
+  }
+});
+
+// Submit quiz
+document.getElementById('quiz-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const answersRaw = document.getElementById('quiz-answers').value;
+  let answers;
+  try {
+    answers = JSON.parse(answersRaw);
+  } catch {
+    alert('Answers must be valid JSON, e.g. {"q1": "a", "q2": "c"}');
+    return;
+  }
+  const data = {
+    course: document.getElementById('quiz-course').value,
+    week: parseInt(document.getElementById('quiz-week').value),
+    anonymous_id: document.getElementById('quiz-id').value,
+    answers: answers,
+    score: parseFloat(document.getElementById('quiz-score').value) || null,
+  };
+  try {
+    await fetch(API_BASE + '/quiz', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+    showSuccess(e.target);
+  } catch (err) {
+    alert('Submission failed. Please try again.');
+  }
+});
+</script>
+</body>
+</html>
