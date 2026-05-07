@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'apps/hct-ml-marketing-lab.html'
+  workflow_dispatch:
 
 jobs:
   deploy:
