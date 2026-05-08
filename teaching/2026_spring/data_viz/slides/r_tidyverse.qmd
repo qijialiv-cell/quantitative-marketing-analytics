@@ -1,0 +1,766 @@
+---
+title: "R Tidyverse for Marketing Analytics"
+subtitle: "An Interactive Textbook"
+author: "University of Liverpool Management School"
+date: today
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    scrollable: true
+    hash: true
+    chalkboard:
+      buttons: true
+    multiplex: true
+    footer: "R Tidyverse · Marketing Analytics"
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# What is Tidyverse?
+
+## The Tidyverse Philosophy
+
+> "A collection of R packages designed for data science, sharing an underlying design philosophy and grammar."
+
+**Core idea:** Write code the way you *think* about data analysis.
+
+```{r}
+#| eval: false
+library(tidyverse)   # loads 8 core packages at once
+```
+
+## The 8 Core Packages
+
+| Package | Purpose | Marketing Use Case |
+|---------|---------|-------------------|
+| `dplyr` | Data manipulation | Filter customers, compute metrics |
+| `ggplot2` | Visualisation | Campaign performance charts |
+| `tidyr` | Reshape data | Wide ↔ long format for modelling |
+| `readr` | Read data | Load CSV files fast |
+| `purrr` | Functional programming | Batch process survey responses |
+| `tibble` | Modern data frames | Better printing & subsetting |
+| `stringr` | String manipulation | Clean product names, parse URLs |
+| `forcats` | Factor handling | Reorder brand categories |
+
+## Installation
+
+```{r}
+#| eval: false
+install.packages("tidyverse")   # one command, everything included
+```
+
+That's it. Now let's learn by doing.
+
+---
+
+# The Pipe Operator `%>%`
+
+## Thinking in Pipes
+
+**Without pipes** — nested functions, read inside-out:
+
+```{r}
+#| eval: false
+result <- round(mean(filter(data, group == "A")$revenue), 2)
+```
+
+**With pipes** — left-to-right, like a sentence:
+
+```{r}
+#| eval: false
+result <- data |>
+  filter(group == "A") |>
+  pull(revenue) |>
+  mean() |>
+  round(2)
+```
+
+> Think of `|>` as **"and then..."**
+
+## Your Turn {background-color="#f0f4f8"}
+
+What does this pipeline do?
+
+```{r}
+#| eval: false
+customers |>
+  filter(churn == "Yes") |>
+  group_by(contract_type) |>
+  summarise(
+    n = n(),
+    avg_tenure = mean(tenure_months)
+  ) |>
+  arrange(desc(n))
+```
+
+:::{.callout-note}
+**Answer:** It finds churned customers, counts them by contract type,
+calculates average tenure for each group, then sorts by count (largest first).
+This tells you which contract type loses the most customers.
+:::
+
+---
+
+# Reading Data with `readr`
+
+## Load Marketing Data
+
+```{r}
+library(readr)
+
+# Simulated customer dataset
+customers <- tibble(
+  customer_id = 1001:1012,
+  segment = c("Premium", "Standard", "Budget", "Premium", "Standard",
+              "Budget", "Premium", "Standard", "Budget", "Premium",
+              "Standard", "Budget"),
+  revenue = c(5200, 3100, 1800, 4800, 2900, 1500, 6100, 3300, 1200, 5500, 2700, 1600),
+  churn = c("No", "No", "Yes", "No", "Yes", "Yes", "No", "No", "Yes", "No", "No", "Yes"),
+  tenure_months = c(36, 24, 6, 30, 12, 3, 48, 18, 2, 42, 15, 4)
+)
+
+customers
+```
+
+## Reading Real Files
+
+```{r}
+#| eval: false
+# CSV — the most common format
+sales <- read_csv("data/sales_2025.csv")
+
+# TSV — tab-separated
+survey <- read_tsv("data/survey_responses.tsv")
+
+# Specifying column types manually
+campaigns <- read_csv("data/campaigns.csv",
+  col_types = cols(
+    campaign_id = col_character(),
+    spend = col_double(),
+    impressions = col_integer(),
+    date = col_date(format = "%Y-%m-%d")
+  )
+)
+```
+
+:::{.callout-tip}
+Always use `read_csv()` (from readr), **not** `read.csv()` (base R).
+It's faster, gives a progress bar, and handles types better.
+:::
+
+---
+
+# `dplyr`: The 6 Verbs
+
+## The Grammar of Data Manipulation
+
+```
+filter()    → pick rows    (which customers?)
+select()    → pick columns (which variables?)
+mutate()    → new columns  (compute metrics)
+arrange()   → sort rows    (rank by performance)
+summarise() → collapse     (aggregate metrics)
+group_by()  → stratify     (per segment)
+```
+
+These 6 verbs cover **90% of data wrangling** in marketing analytics.
+
+---
+
+## `filter()` — Pick Rows
+
+```{r}
+# Premium customers only
+customers |>
+  filter(segment == "Premium")
+```
+
+## Multiple Conditions
+
+```{r}
+# Premium customers with high revenue who haven't churned
+customers |>
+  filter(
+    segment == "Premium",
+    revenue > 5000,
+    churn == "No"
+  )
+```
+
+```{r}
+# Customers who churned OR have low tenure
+customers |>
+  filter(churn == "Yes" | tenure_months <= 3)
+```
+
+> **Marketing interpretation:** This identifies at-risk customers —
+> those who already left or are very new. Target these for retention campaigns.
+
+---
+
+## `select()` — Pick Columns
+
+```{r}
+# Only the columns you need
+customers |>
+  select(customer_id, segment, revenue)
+```
+
+## Helper Functions
+
+```{r}
+#| eval: false
+# Select by pattern
+select(data, starts_with("campaign_"))
+select(data, ends_with("_rate"))
+select(data, contains("click"))
+
+# Exclude columns
+select(data, -customer_id, -timestamp)
+
+# Rename while selecting
+select(data, seg = segment, rev = revenue)
+```
+
+:::{.callout-note}
+**Why select?** Working with fewer columns makes code clearer,
+prints neater, and prevents accidental information leakage in modelling.
+:::
+
+---
+
+## `mutate()` — Create New Columns
+
+```{r}
+customers |>
+  mutate(
+    revenue_per_month = revenue / tenure_months,
+    is_high_value = revenue > 4000,
+    risk_level = case_when(
+      churn == "Yes" ~ "Lost",
+      tenure_months <= 6 ~ "High Risk",
+      revenue > 4000 ~ "Stable",
+      TRUE ~ "Monitor"
+    )
+  )
+```
+
+> `case_when()` is your best friend for creating marketing segments —
+> it's readable, flexible, and handles edge cases with `TRUE ~`.
+
+## `mutate()` Across Columns
+
+```{r}
+#| eval: false
+# Apply same transformation to multiple columns
+campaign_data |>
+  mutate(across(contains("_rate"), ~ .x * 100))  # decimals to percentages
+
+# Or with a named list
+campaign_data |>
+  mutate(across(
+    c(open_rate, click_rate, conversion_rate),
+    list(pct = ~ .x * 100, label = ~ paste0(round(.x * 100, 1), "%"))
+  ))
+```
+
+---
+
+## `arrange()` — Sort Rows
+
+```{r}
+# Highest revenue first
+customers |>
+  arrange(desc(revenue))
+```
+
+```{r}
+# Sort by segment, then by revenue within each segment
+customers |>
+  arrange(segment, desc(revenue))
+```
+
+---
+
+## `summarise()` + `group_by()`
+
+```{r}
+# Revenue per segment
+customers |>
+  group_by(segment) |>
+  summarise(
+    n_customers = n(),
+    total_revenue = sum(revenue),
+    avg_revenue = mean(revenue),
+    churn_rate = mean(churn == "Yes")
+  ) |>
+  arrange(desc(total_revenue))
+```
+
+> `mean(churn == "Yes")` is a neat trick — TRUE/FALSE becomes 1/0, so the mean
+> gives you the **churn rate** directly. Very useful for binary marketing outcomes.
+
+## Multiple Grouping Levels
+
+```{r}
+#| eval: false
+# Revenue by segment AND churn status
+customers |>
+  group_by(segment, churn) |>
+  summarise(
+    n = n(),
+    avg_revenue = mean(revenue),
+    avg_tenure = mean(tenure_months),
+    .groups = "drop"     # always drop grouping after summarise
+  )
+```
+
+---
+
+## Combining All Verbs
+
+A typical marketing analysis pipeline:
+
+```{r}
+customers |>
+  filter(churn == "No") |>                          # active customers only
+  mutate(tenure_years = tenure_months / 12) |>      # compute new metric
+  group_by(segment) |>                              # per segment
+  summarise(                                        # aggregate
+    n = n(),
+    avg_revenue = mean(revenue),
+    avg_tenure_yr = mean(tenure_years),
+    clv_estimate = avg_revenue * avg_tenure_yr      # rough CLV
+  ) |>
+  arrange(desc(clv_estimate))                       # rank
+```
+
+> **Customer Lifetime Value (CLV)** is one of the most important metrics in marketing.
+> Here we use a simple formula: `revenue × tenure`. In practice, use discount rates and churn probabilities.
+
+---
+
+# `tidyr`: Reshape Data
+
+## Why Reshape?
+
+Marketing data comes in two shapes:
+
+```{r}
+# WIDE — one row per entity, metrics in columns (common in reports)
+wide_data <- tibble(
+  brand = c("Nike", "Adidas", "Puma"),
+  q1_spend = c(120, 95, 40),
+  q2_spend = c(135, 88, 52),
+  q3_spend = c(140, 102, 48)
+)
+
+wide_data
+```
+
+## Wide → Long with `pivot_longer()`
+
+```{r}
+long_data <- wide_data |>
+  pivot_longer(
+    cols = starts_with("q"),
+    names_to = "quarter",
+    values_to = "spend",
+    names_prefix = "q",
+    names_transform = list(quarter = as.integer)
+  )
+
+long_data
+```
+
+> **ggplot2 requires long format.** If your chart looks wrong, pivot longer first.
+
+## Long → Wide with `pivot_wider()`
+
+```{r}
+# Back to wide
+long_data |>
+  pivot_wider(
+    names_from = quarter,
+    values_from = spend,
+    names_prefix = "q"
+  )
+```
+
+## Handling Missing Data
+
+```{r}
+#| eval: false
+# Fill missing values
+data |>
+  fill(campaign_name, .direction = "down")   # forward-fill
+
+# Drop rows with missing values
+data |>
+  drop_na(revenue)                           # only where revenue is NA
+
+# Replace NAs
+data |>
+  replace_na(list(spend = 0, channel = "Unknown"))
+
+# Explicit NAs in pivoting
+long_data |>
+  pivot_wider(
+    names_from = quarter,
+    values_from = spend,
+    values_fill = 0          # replace NA with 0
+  )
+```
+
+---
+
+# `ggplot2`: Visualise
+
+## The Grammar of Graphics
+
+Every ggplot has **three layers minimum**:
+
+```{r}
+#| eval: false
+ggplot(data = <data>) +         # 1. What data?
+  aes(x = <var>, y = <var>) +   # 2. What variables?
+  geom_<type>()                  # 3. What geometry?
+```
+
+> Think: **data → aesthetics → geometry**. Same philosophy as the ggplot you learned before, now in R.
+
+## Bar Chart — Revenue by Segment
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+library(ggplot2)
+
+customers |>
+  group_by(segment) |>
+  summarise(total_revenue = sum(revenue)) |>
+  ggplot(aes(x = reorder(segment, total_revenue), y = total_revenue, fill = segment)) +
+  geom_col(show.legend = FALSE) +
+  geom_text(aes(label = scales::dollar(total_revenue)), hjust = 1.2, colour = "white", size = 4) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Blues") +
+  labs(
+    title = "Total Revenue by Customer Segment",
+    subtitle = "Premium segment generates the most revenue",
+    x = NULL,
+    y = "Total Revenue (£)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Scatter Plot — Revenue vs Tenure
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+customers |>
+  ggplot(aes(x = tenure_months, y = revenue, colour = churn)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.8) +
+  scale_colour_manual(values = c("No" = "#2c7bb6", "Yes" = "#d7191c")) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) +
+  labs(
+    title = "Revenue vs Customer Tenure",
+    subtitle = "Churned customers cluster at low tenure",
+    x = "Tenure (months)",
+    y = "Revenue (£)",
+    colour = "Churned?"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+> **Marketing insight:** Churned customers (red) are concentrated in the
+> lower-left — low tenure, low revenue. This suggests an **early retention problem**,
+> not a product quality issue.
+
+## Faceting — Small Multiples
+
+```{r}
+#| fig-width: 9
+#| fig-height: 4
+customers |>
+  ggplot(aes(x = tenure_months, y = revenue)) +
+  geom_point(size = 3, aes(colour = churn)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ segment) +
+  scale_colour_manual(values = c("No" = "#2c7bb6", "Yes" = "#d7191c")) +
+  labs(
+    title = "Revenue vs Tenure by Segment",
+    x = "Tenure (months)",
+    y = "Revenue (£)"
+  ) +
+  theme_minimal(base_size = 13)
+```
+
+---
+
+# `stringr` & `forcats`
+
+## Clean Text with `stringr`
+
+```{r}
+#| eval: false
+library(stringr)
+
+# Common marketing data cleaning
+products |>
+  mutate(
+    name_clean = str_to_title(product_name),     # "nike AIR max" → "Nike Air Max"
+    brand = str_extract(name_clean, "^\\w+"),    # first word as brand
+    price_num = str_extract(price, "\\d+") |>    # "£120" → "120"
+              as.numeric(),
+    has_discount = str_detect(promo, "sale|off") # TRUE/FALSE
+  )
+```
+
+## Reorder Categories with `forcats`
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+
+# fct_reorder: order bars by value (not alphabetically)
+customers |>
+  mutate(segment = fct_reorder(segment, revenue, .fun = mean)) |>
+  ggplot(aes(x = segment, y = revenue, fill = segment)) +
+  geom_boxplot(show.legend = FALSE, alpha = 0.7) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Revenue Distribution by Segment",
+    subtitle = "Segments ordered by median revenue",
+    x = NULL,
+    y = "Revenue (£)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+---
+
+# Real-World Workflow
+
+## Campaign Performance Analysis
+
+```{r}
+# A realistic marketing dataset
+campaigns <- tibble(
+  campaign = c("Summer Sale", "Summer Sale", "Black Friday", "Black Friday",
+               "Loyalty Email", "Loyalty Email", "Social Ads", "Social Ads"),
+  channel = c("Email", "Social", "Email", "Social", "Email", "Social", "Email", "Social"),
+  impressions = c(50000, 120000, 80000, 200000, 30000, 45000, 40000, 95000),
+  clicks = c(2500, 3600, 5600, 8000, 1800, 1350, 1600, 4750),
+  conversions = c(125, 72, 392, 160, 198, 45, 64, 95),
+  spend = c(500, 1800, 800, 3000, 200, 675, 400, 1425)
+)
+```
+
+## Step 1: Compute Key Metrics
+
+```{r}
+campaign_metrics <- campaigns |>
+  mutate(
+    ctr = clicks / impressions,              # click-through rate
+    cvr = conversions / clicks,              # conversion rate
+    cpc = spend / clicks,                    # cost per click
+    cpa = spend / conversions,               # cost per acquisition
+    roas = (conversions * 50) / spend        # return on ad spend (£50 avg order)
+  ) |>
+  arrange(desc(roas))
+
+campaign_metrics |>
+  select(campaign, channel, ctr, cvr, cpa, roas) |>
+  print(width = Inf)
+```
+
+## Step 2: Visualise Performance
+
+```{r}
+#| fig-width: 9
+#| fig-height: 5
+campaign_metrics |>
+  mutate(campaign = fct_reorder(campaign, roas)) |>
+  ggplot(aes(x = roas, y = campaign, fill = channel)) +
+  geom_col(alpha = 0.85) +
+  geom_vline(xintercept = 1, linetype = "dashed", colour = "red", linewidth = 0.7) +
+  annotate("text", x = 1.1, y = 3.5, label = "Break-even", colour = "red", size = 3.5) +
+  scale_x_continuous(labels = scales::dollar_format(prefix = "£")) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(
+    title = "Campaign ROAS by Channel",
+    subtitle = "Dashed line = break-even; everything to the right is profitable",
+    x = "Return on Ad Spend (£)",
+    y = NULL,
+    fill = "Channel"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Step 3: Summarise & Recommend
+
+```{r}
+campaigns |>
+  group_by(channel) |>
+  summarise(
+    total_spend = sum(spend),
+    total_conversions = sum(conversions),
+    overall_cpa = total_spend / total_conversions,
+    overall_roas = (total_conversions * 50) / total_spend
+  ) |>
+  mutate(recommendation = case_when(
+    overall_roas > 2 ~ "Scale up",
+    overall_roas > 1 ~ "Optimise",
+    TRUE ~ "Pause & review"
+  )) |>
+  arrange(desc(overall_roas))
+```
+
+> **Marketing decision:** Email outperforms Social on ROAS despite lower spend.
+> Recommendation: **reallocate 20% of Social budget to Email** and test higher send volumes.
+
+---
+
+# Exercises
+
+## Exercise 1: Customer Segmentation
+
+Using the `customers` dataset:
+
+1. Create a new column `tenure_group` with buckets: `<6mo`, `6-12mo`, `12-24mo`, `24+mo`
+2. Calculate churn rate by `segment` and `tenure_group`
+3. Visualise with a grouped bar chart
+4. Which segment × tenure combination has the highest churn risk?
+
+:::{.callout hint collapse="true"}
+## Hint
+
+```{r}
+#| eval: false
+customers |>
+  mutate(tenure_group = case_when(
+    tenure_months < 6 ~ "<6mo",
+    tenure_months < 12 ~ "6-12mo",
+    tenure_months < 24 ~ "12-24mo",
+    TRUE ~ "24+mo"
+  )) |>
+  group_by(segment, tenure_group) |>
+  summarise(churn_rate = mean(churn == "Yes"), n = n(), .groups = "drop") |>
+  ggplot(aes(x = tenure_group, y = churn_rate, fill = segment)) +
+  geom_col(position = "dodge") +
+  labs(title = "Churn Rate by Segment and Tenure")
+```
+:::
+
+## Exercise 2: Campaign Analysis
+
+Using the `campaigns` dataset:
+
+1. Which campaign has the **best CPA**? The **worst**?
+2. Is Email or Social more cost-effective overall?
+3. Create a scatter plot of `spend` vs `conversions`, sized by `ROAS`. What pattern do you see?
+
+## Exercise 3: Build a Dashboard Table
+
+Create a summary table that a marketing manager could use weekly:
+
+```{r}
+#| eval: false
+# Your pipeline here:
+# - Filter to a specific time period
+# - Group by campaign and channel
+# - Calculate: spend, impressions, clicks, conversions, CTR, CVR, CPA, ROAS
+# - Add a "status" column (On Track / At Risk / Underperforming)
+# - Arrange by ROAS descending
+# - Use gt() or kable() for a formatted table
+```
+
+---
+
+# Cheat Sheet
+
+## The One-Page Reference
+
+```{r}
+#| eval: false
+# THE TIDYVERSE WORKFLOW
+
+# 1. LOAD
+library(tidyverse)
+
+# 2. READ
+data <- read_csv("file.csv")
+
+# 3. TRANSFORM (dplyr + tidyr)
+result <- data |>
+  filter(condition) |>              # keep rows
+  select(columns) |>                # keep columns
+  mutate(new_col = f(existing)) |>  # create columns
+  pivot_longer(cols, names_to, values_to) |>  # reshape
+  group_by(category) |>             # stratify
+  summarise(metric = fun(value)) |> # aggregate
+  arrange(desc(metric))             # sort
+
+# 4. VISUALISE (ggplot2)
+result |>
+  ggplot(aes(x = var1, y = var2)) +
+  geom_<type>() +
+  labs(title = "...", x = "...", y = "...")
+
+# 5. COMMUNICATE (interpret in marketing terms!)
+```
+
+---
+
+# Key Takeaways
+
+## What You Learned Today
+
+1. **`|>` (pipe)** — chain operations left-to-right, like a sentence
+2. **6 dplyr verbs** — filter, select, mutate, arrange, summarise, group_by
+3. **`pivot_longer/wider`** — reshape data for analysis and visualisation
+4. **ggplot2 grammar** — data + aesthetics + geometry + facets + theme
+5. **Always interpret** — every number should answer a marketing question
+
+## Common Mistakes to Avoid
+
+| Mistake | Fix |
+|---------|-----|
+| Forgetting `group_by()` before `summarise()` | Always group first when you want per-category stats |
+| Using `=` instead of `==` in `filter()` | `==` tests equality; `=` is for assignment |
+| Plotting wide format data | Pivot longer first: ggplot needs tidy data |
+| Ignoring NAs | Use `na.rm = TRUE` or `drop_na()` explicitly |
+| Not interpreting results | Every metric → "so what?" for marketing |
+
+## Next Steps
+
+- **Practice:** Complete the exercises above
+- **Read:** [R for Data Science (2e)](https://r4ds.hadley.nz/) — free online textbook
+- **Explore:** `?dplyr`, `?ggplot2` in R console for built-in help
+- **Next session:** Advanced ggplot2 — themes, annotations, and publication-quality figures
+
+---
+
+# Appendix: Setup
+
+## R Environment
+
+```{r}
+#| eval: false
+# Install (run once)
+install.packages(c("tidyverse", "scales", "gt"))
+
+# Load (run every session)
+library(tidyverse)
+library(scales)
+library(gt)
+
+# Recommended settings
+options(digits = 3, scipen = 20)   # avoid scientific notation
+theme_set(theme_minimal(base_size = 14))  # clean default theme
+```

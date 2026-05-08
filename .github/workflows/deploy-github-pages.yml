@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'quarto/**'
+      - 'teaching/**/slides/**'
   workflow_dispatch:
 
 permissions:
@@ -33,6 +34,18 @@ jobs:
         run: |
           cd quarto/website
           quarto render
+
+      - name: Render teaching slides
+        run: |
+          for dir in teaching/2026_spring/*/slides; do
+            if [ -d "$dir" ]; then
+              echo "Rendering $dir"
+              quarto render "$dir" --output-dir "$dir/_site"
+              slide_name=$(basename $(dirname "$dir"))
+              mkdir -p quarto/website/_site/teaching/${slide_name}
+              cp -r "$dir/_site/"* quarto/website/_site/teaching/${slide_name}/
+            fi
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

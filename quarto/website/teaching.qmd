@@ -6,6 +6,10 @@ title: "Teaching"
 
 University of Liverpool Management School
 
+**Slides:**
+
+- [R Tidyverse for Marketing Analytics](/teaching/data_viz/r_tidyverse.html) — Interactive textbook (revealjs)
+
 **Topics covered:**
 
 - Customer Analytics & Segmentation
