@@ -27,7 +27,20 @@ streamlit run admin/dashboard.py
 
 ## Deployment
 
-- **API + Admin Dashboard** → Render (free tier)
+- **API backend** → Render web service (`uvicorn api.main:app`)
+- **Admin dashboard** → Render web service separate deployment (`streamlit run admin/dashboard.py`)
+- **Feedback form** → Cloudflare Pages (static HTML)
+
+### Render Deployment Notes
+
+⚠️ **Python Version:** Set to 3.11 to ensure pandas wheels are pre-built (avoids compilation timeouts)
+
+The `requirements.txt` in this directory includes only necessary dependencies:
+- FastAPI, Uvicorn (API)
+- Streamlit, Plotly, Pandas (Admin dashboard)
+- No heavy ML libraries (torch, transformers, etc.)
+
+This ensures faster builds and avoids timeouts on Render's free tier.
 - **Feedback Form** → Cloudflare Pages (static HTML)
 
 ## Data Schema

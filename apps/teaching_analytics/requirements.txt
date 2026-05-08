@@ -1,0 +1,16 @@
+# Teaching Analytics API & Admin Dashboard — Minimal dependencies
+# University of Liverpool | Computational Marketing
+# Last updated: 2026-05-08
+
+# Core (FastAPI backend)
+fastapi==0.111.0
+uvicorn==0.30.1
+pydantic==2.7.0
+
+# Data & visualization (Admin dashboard)
+pandas>=2.1.0
+plotly==5.22.0
+streamlit==1.35.0
+
+# Utilities
+python-dotenv==1.0.1
