@@ -26,28 +26,24 @@
       状态: ✅ Live (仅海外可访问)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  待部署 — 需要操作
+  待部署 — 需要操作 (UPDATED 2026-05-08)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  [ ] FastAPI Teaching Analytics API (Render Web Service)
-      → 需要在 Render Dashboard 绑定信用卡（不扣费，仅验证）
-      → 绑卡地址: https://dashboard.render.com/billing
-      → 绑卡后通知我，我继续创建服务
-
-  [ ] Streamlit Admin Dashboard (Render Web Service)
-      → 同上，需要绑卡
-
-  [ ] Quarto 学术主站 (Cloudflare Pages 或 Render)
-      → 需要购买域名 qijialiao.com（~$10/年）
-      → 或者先部署到 Render static site
-
-  [ ] React 学生仪表盘 (Vercel)
-      → 需要 React 代码先写好
-      → 可以后续再做
-
-  [ ] Hugging Face Spaces (Gradio ML Demo)
-      → 需要 HF Token
-      → churn_predictor 和 embedding_explorer
+  [ ] Quarto 学术主站 (Cloudflare Pages)
+      ⚠️  现状：GitHub workflow 已修复（Node.js v22、assets 流程正确）
+      ⚠️  缺失：Cloudflare Pages 项目 "quantitative-marketing-analytics"
+      
+      步骤：
+      1. 登录 Cloudflare Dashboard → https://dash.cloudflare.com
+      2. 左侧菜单 → Workers & Pages
+      3. 点击 "Create Application" → 选 "Pages"
+      4. 选 GitHub 连接
+      5. 选择 repo: qijialiv-cell/quantitative-marketing-analytics
+      6. 工程名: quantitative-marketing-analytics (必须匹配!)
+      7. 构建命令留空（因为我们用 GitHub Actions）
+      8. 构建输出目录: quarto/website/_site
+      9. 环境变量: 无需添加（已在 GitHub Secrets 中）
+      10. 部署！
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   账号状态
