@@ -37,6 +37,11 @@ jobs:
           mkdir -p quarto/website/_site/feedback
           cp apps/teaching_analytics/feedback_form.html quarto/website/_site/feedback/index.html
 
+      - name: Setup Node.js v22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
