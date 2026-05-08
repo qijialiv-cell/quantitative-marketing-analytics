@@ -13,11 +13,6 @@ format:
       buttons: true
     multiplex: true
     footer: "R Tidyverse · Marketing Analytics"
-execute:
-  echo: true
-  warning: false
-  message: false
-  eval: false
 ---
 
 # What is Tidyverse?
@@ -28,8 +23,7 @@ execute:
 
 **Core idea:** Write code the way you *think* about data analysis.
 
-```{r}
-#| eval: false
+```r
 library(tidyverse)   # loads 8 core packages at once
 ```
 
@@ -48,8 +42,7 @@ library(tidyverse)   # loads 8 core packages at once
 
 ## Installation
 
-```{r}
-#| eval: false
+```r
 install.packages("tidyverse")   # one command, everything included
 ```
 
@@ -63,15 +56,13 @@ That's it. Now let's learn by doing.
 
 **Without pipes** — nested functions, read inside-out:
 
-```{r}
-#| eval: false
+```r
 result <- round(mean(filter(data, group == "A")$revenue), 2)
 ```
 
 **With pipes** — left-to-right, like a sentence:
 
-```{r}
-#| eval: false
+```r
 result <- data |>
   filter(group == "A") |>
   pull(revenue) |>
@@ -85,8 +76,7 @@ result <- data |>
 
 What does this pipeline do?
 
-```{r}
-#| eval: false
+```r
 customers |>
   filter(churn == "Yes") |>
   group_by(contract_type) |>
@@ -109,7 +99,7 @@ This tells you which contract type loses the most customers.
 
 ## Load Marketing Data
 
-```{r}
+```r
 library(readr)
 
 # Simulated customer dataset
@@ -128,8 +118,7 @@ customers
 
 ## Reading Real Files
 
-```{r}
-#| eval: false
+```r
 # CSV — the most common format
 sales <- read_csv("data/sales_2025.csv")
 
@@ -173,7 +162,7 @@ These 6 verbs cover **90% of data wrangling** in marketing analytics.
 
 ## `filter()` — Pick Rows
 
-```{r}
+```r
 # Premium customers only
 customers |>
   filter(segment == "Premium")
@@ -181,7 +170,7 @@ customers |>
 
 ## Multiple Conditions
 
-```{r}
+```r
 # Premium customers with high revenue who haven't churned
 customers |>
   filter(
@@ -191,7 +180,7 @@ customers |>
   )
 ```
 
-```{r}
+```r
 # Customers who churned OR have low tenure
 customers |>
   filter(churn == "Yes" | tenure_months <= 3)
@@ -204,7 +193,7 @@ customers |>
 
 ## `select()` — Pick Columns
 
-```{r}
+```r
 # Only the columns you need
 customers |>
   select(customer_id, segment, revenue)
@@ -212,8 +201,7 @@ customers |>
 
 ## Helper Functions
 
-```{r}
-#| eval: false
+```r
 # Select by pattern
 select(data, starts_with("campaign_"))
 select(data, ends_with("_rate"))
@@ -235,7 +223,7 @@ prints neater, and prevents accidental information leakage in modelling.
 
 ## `mutate()` — Create New Columns
 
-```{r}
+```r
 customers |>
   mutate(
     revenue_per_month = revenue / tenure_months,
@@ -254,8 +242,7 @@ customers |>
 
 ## `mutate()` Across Columns
 
-```{r}
-#| eval: false
+```r
 # Apply same transformation to multiple columns
 campaign_data |>
   mutate(across(contains("_rate"), ~ .x * 100))  # decimals to percentages
@@ -272,13 +259,13 @@ campaign_data |>
 
 ## `arrange()` — Sort Rows
 
-```{r}
+```r
 # Highest revenue first
 customers |>
   arrange(desc(revenue))
 ```
 
-```{r}
+```r
 # Sort by segment, then by revenue within each segment
 customers |>
   arrange(segment, desc(revenue))
@@ -288,7 +275,7 @@ customers |>
 
 ## `summarise()` + `group_by()`
 
-```{r}
+```r
 # Revenue per segment
 customers |>
   group_by(segment) |>
@@ -306,8 +293,7 @@ customers |>
 
 ## Multiple Grouping Levels
 
-```{r}
-#| eval: false
+```r
 # Revenue by segment AND churn status
 customers |>
   group_by(segment, churn) |>
@@ -325,7 +311,7 @@ customers |>
 
 A typical marketing analysis pipeline:
 
-```{r}
+```r
 customers |>
   filter(churn == "No") |>                          # active customers only
   mutate(tenure_years = tenure_months / 12) |>      # compute new metric
@@ -350,7 +336,7 @@ customers |>
 
 Marketing data comes in two shapes:
 
-```{r}
+```r
 # WIDE — one row per entity, metrics in columns (common in reports)
 wide_data <- tibble(
   brand = c("Nike", "Adidas", "Puma"),
@@ -364,7 +350,7 @@ wide_data
 
 ## Wide → Long with `pivot_longer()`
 
-```{r}
+```r
 long_data <- wide_data |>
   pivot_longer(
     cols = starts_with("q"),
@@ -381,7 +367,7 @@ long_data
 
 ## Long → Wide with `pivot_wider()`
 
-```{r}
+```r
 # Back to wide
 long_data |>
   pivot_wider(
@@ -393,8 +379,7 @@ long_data |>
 
 ## Handling Missing Data
 
-```{r}
-#| eval: false
+```r
 # Fill missing values
 data |>
   fill(campaign_name, .direction = "down")   # forward-fill
@@ -424,8 +409,7 @@ long_data |>
 
 Every ggplot has **three layers minimum**:
 
-```{r}
-#| eval: false
+```r
 ggplot(data = <data>) +         # 1. What data?
   aes(x = <var>, y = <var>) +   # 2. What variables?
   geom_<type>()                  # 3. What geometry?
@@ -435,9 +419,7 @@ ggplot(data = <data>) +         # 1. What data?
 
 ## Bar Chart — Revenue by Segment
 
-```{r}
-#| fig-width: 8
-#| fig-height: 4
+```r
 library(ggplot2)
 
 customers |>
@@ -459,9 +441,7 @@ customers |>
 
 ## Scatter Plot — Revenue vs Tenure
 
-```{r}
-#| fig-width: 8
-#| fig-height: 5
+```r
 customers |>
   ggplot(aes(x = tenure_months, y = revenue, colour = churn)) +
   geom_point(size = 3, alpha = 0.8) +
@@ -484,9 +464,7 @@ customers |>
 
 ## Faceting — Small Multiples
 
-```{r}
-#| fig-width: 9
-#| fig-height: 4
+```r
 customers |>
   ggplot(aes(x = tenure_months, y = revenue)) +
   geom_point(size = 3, aes(colour = churn)) +
@@ -507,8 +485,7 @@ customers |>
 
 ## Clean Text with `stringr`
 
-```{r}
-#| eval: false
+```r
 library(stringr)
 
 # Common marketing data cleaning
@@ -524,9 +501,7 @@ products |>
 
 ## Reorder Categories with `forcats`
 
-```{r}
-#| fig-width: 8
-#| fig-height: 4
+```r
 
 # fct_reorder: order bars by value (not alphabetically)
 customers |>
@@ -549,7 +524,7 @@ customers |>
 
 ## Campaign Performance Analysis
 
-```{r}
+```r
 # A realistic marketing dataset
 campaigns <- tibble(
   campaign = c("Summer Sale", "Summer Sale", "Black Friday", "Black Friday",
@@ -564,7 +539,7 @@ campaigns <- tibble(
 
 ## Step 1: Compute Key Metrics
 
-```{r}
+```r
 campaign_metrics <- campaigns |>
   mutate(
     ctr = clicks / impressions,              # click-through rate
@@ -582,9 +557,7 @@ campaign_metrics |>
 
 ## Step 2: Visualise Performance
 
-```{r}
-#| fig-width: 9
-#| fig-height: 5
+```r
 campaign_metrics |>
   mutate(campaign = fct_reorder(campaign, roas)) |>
   ggplot(aes(x = roas, y = campaign, fill = channel)) +
@@ -605,7 +578,7 @@ campaign_metrics |>
 
 ## Step 3: Summarise & Recommend
 
-```{r}
+```r
 campaigns |>
   group_by(channel) |>
   summarise(
@@ -641,8 +614,7 @@ Using the `customers` dataset:
 :::{.callout hint collapse="true"}
 ## Hint
 
-```{r}
-#| eval: false
+```r
 customers |>
   mutate(tenure_group = case_when(
     tenure_months < 6 ~ "<6mo",
@@ -670,8 +642,7 @@ Using the `campaigns` dataset:
 
 Create a summary table that a marketing manager could use weekly:
 
-```{r}
-#| eval: false
+```r
 # Your pipeline here:
 # - Filter to a specific time period
 # - Group by campaign and channel
@@ -687,8 +658,7 @@ Create a summary table that a marketing manager could use weekly:
 
 ## The One-Page Reference
 
-```{r}
-#| eval: false
+```r
 # THE TIDYVERSE WORKFLOW
 
 # 1. LOAD
@@ -751,8 +721,7 @@ result |>
 
 ## R Environment
 
-```{r}
-#| eval: false
+```r
 # Install (run once)
 install.packages(c("tidyverse", "scales", "gt"))
 
