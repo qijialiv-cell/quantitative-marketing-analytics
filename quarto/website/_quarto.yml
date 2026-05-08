@@ -1,3 +1,5 @@
+# Quarto website configuration
+# Last updated: 2026-05-08 (Cloudflare Pages deployment)
 project:
   type: website
   output-dir: _site
