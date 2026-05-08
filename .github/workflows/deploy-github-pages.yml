@@ -37,13 +37,13 @@ jobs:
 
       - name: Render teaching slides
         run: |
-          for dir in teaching/2026_spring/*/slides; do
-            if [ -d "$dir" ]; then
-              echo "Rendering $dir"
-              quarto render "$dir" --output-dir "$dir/_site"
-              slide_name=$(basename $(dirname "$dir"))
-              mkdir -p quarto/website/_site/teaching/${slide_name}
-              cp -r "$dir/_site/"* quarto/website/_site/teaching/${slide_name}/
+          for qmd in teaching/2026_spring/*/slides/*.qmd; do
+            if [ -f "$qmd" ]; then
+              echo "Rendering $qmd"
+              slide_name=$(basename $(dirname $(dirname "$qmd")))
+              output_dir="quarto/website/_site/teaching/${slide_name}"
+              mkdir -p "$output_dir"
+              quarto render "$qmd" --output-dir "$output_dir" --execute false
             fi
           done
 
