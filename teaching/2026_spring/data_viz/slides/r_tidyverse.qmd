@@ -3,16 +3,18 @@ title: "R Tidyverse for Marketing Analytics"
 subtitle: "An Interactive Textbook"
 author: "University of Liverpool Management School"
 date: today
+execute:
+  enabled: false
 format:
   revealjs:
     theme: simple
-    slide-number: true
     scrollable: true
+    slide-number: true
     hash: true
     chalkboard:
       buttons: true
-    multiplex: true
     footer: "R Tidyverse · Marketing Analytics"
+    syntax-highlighting: github
 ---
 
 # What is Tidyverse?
@@ -502,7 +504,6 @@ products |>
 ## Reorder Categories with `forcats`
 
 ```r
-
 # fct_reorder: order bars by value (not alphabetically)
 customers |>
   mutate(segment = fct_reorder(segment, revenue, .fun = mean)) |>
