@@ -1,0 +1,16 @@
+# Semantic Similarity Explorer — Gradio Demo
+# University of Liverpool | Computational Marketing
+# Deployment: Hugging Face Spaces
+# Last updated: 2026-05-08
+
+# App
+gradio==4.36.0
+
+# Data science
+numpy>=1.26.0
+scikit-learn==1.4.2
+matplotlib==3.8.4
+
+# NLP / Embeddings
+sentence-transformers==3.0.0
+torch==2.3.0

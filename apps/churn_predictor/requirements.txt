@@ -1,0 +1,17 @@
+# Churn Predictor — Streamlit Demo
+# University of Liverpool | Computational Marketing
+# Last updated: 2026-05-08
+
+# Core
+streamlit==1.35.0
+
+# Data science
+pandas>=2.1.0
+numpy>=1.26.0
+scikit-learn==1.4.2
+
+# Visualization
+plotly==5.22.0
+
+# Utilities
+python-dotenv==1.0.1
