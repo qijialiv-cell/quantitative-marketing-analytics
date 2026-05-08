@@ -26,6 +26,26 @@
       状态: ✅ Live (仅海外可访问)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  已优化 — Render 部署配置 (2026-05-08)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✅ teaching_analytics (FastAPI API)
+     - App-specific requirements.txt (pandas, streamlit, plotly only)
+     - Python 3.11 (wheels pre-built, avoiding 4+ min compilation)
+     - 预计构建时间: < 2 分钟
+
+  ✅ churn_predictor (Streamlit 教学演示)
+     - App-specific requirements.txt (无 torch/transformers)
+     - Python 3.11
+     - 预计构建时间: < 2 分钟
+
+  ✅ embedding_explorer (Gradio 演示)
+     - requirements.txt 已建立
+     - 部署到 HF Spaces（非 Render）
+     
+  📖 详见: RENDER_DEPLOYMENT_FIX.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   待部署 — 需要操作 (UPDATED 2026-05-08)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
